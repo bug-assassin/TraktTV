@@ -1,5 +1,6 @@
 package com.pixis.trakt_api
 
+import com.pixis.trakt_api.Token.TokenStorage
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -9,7 +10,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 /**
  * Created by Dan on 11/11/2016.
  */
-class TraktAPI(val tokenDatabase: TokenDatabase) {
+class TraktAPI(val tokenStorage: TokenStorage) {
     fun createOkHttpClient(client_id: String): OkHttpClient.Builder {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
@@ -28,14 +29,26 @@ class TraktAPI(val tokenDatabase: TokenDatabase) {
 
         okHttpClient.addInterceptor { chain ->
             var newRequest = chain.request()
-            if (tokenDatabase.isAuthenticated()) {
+            if (tokenStorage.isAuthenticated()) {
                 newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization", "Bearer " + tokenDatabase.getAccessToken())
+                        .addHeader("Authorization", "Bearer " + tokenStorage.getAccessToken())
                         .build()
             }
 
             return@addInterceptor chain.proceed(newRequest)
         }
+
+        //Authenticator refreshes the token
+        /*okHttpClient.authenticator { route, response ->
+
+            val accessToken: String = refreshToken()
+            //TODO stop after 3 retries
+
+                return@authenticator response.request()
+                        .newBuilder()
+                        .header("Authorization", "Bearer " + accessToken)
+                        .build()
+        }*/
 
         return okHttpClient
     }
@@ -51,7 +64,7 @@ class TraktAPI(val tokenDatabase: TokenDatabase) {
 
     fun refreshToken() : String {
         //TODO
-        //tokenDatabase.getToken().refresh_token
+        //tokenStorage.getToken().refresh_token
         return ""
     }
 

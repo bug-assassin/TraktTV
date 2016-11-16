@@ -8,7 +8,7 @@ import com.pixis.traktTV.adapters.TrackedItemAdapter
 import com.pixis.traktTV.base.BaseActivity
 import com.pixis.traktTV.data.models.TrackedItem
 import com.pixis.traktTV.views.AdvancedRecyclerView
-import com.pixis.trakt_api.TokenDatabase
+import com.pixis.trakt_api.Token.TokenDatabase
 import com.pixis.trakt_api.services.Sync
 import com.pixis.trakt_api.utils.applySchedulers
 import rx.Observable

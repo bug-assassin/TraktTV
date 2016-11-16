@@ -9,7 +9,7 @@ import butterknife.OnClick
 import com.pixis.traktTV.base.BaseActivity
 import com.pixis.traktTV.views.AuthDialog
 import com.pixis.traktTV.views.AuthDialogResultListener
-import com.pixis.trakt_api.TokenDatabase
+import com.pixis.trakt_api.Token.TokenDatabase
 import com.pixis.trakt_api.services.Authentication
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers

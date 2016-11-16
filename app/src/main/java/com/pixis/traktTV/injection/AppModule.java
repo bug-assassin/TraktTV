@@ -2,7 +2,7 @@ package com.pixis.traktTV.injection;
 
 import android.app.Application;
 
-import com.pixis.trakt_api.TokenDatabase;
+import com.pixis.trakt_api.Token.TokenDatabase;
 import com.pixis.trakt_api.TraktAPI;
 
 import javax.inject.Singleton;

@@ -1,4 +1,4 @@
-package com.pixis.trakt_api
+package com.pixis.trakt_api.Token
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -7,7 +7,7 @@ import com.pixis.trakt_api.network_models.AccessToken
 /**
  * Created by Dan on 11/15/2016.
  */
-class TokenDatabase(val context: Context) {
+class TokenDatabase(val context: Context) : TokenStorage {
 
     val prefs : SharedPreferences
 
@@ -23,15 +23,15 @@ class TokenDatabase(val context: Context) {
         private val SCOPE_KEY: String = "SCOPE_KEY"
     }
 
-    fun isAuthenticated(): Boolean {
+    override fun isAuthenticated(): Boolean {
         return prefs.getBoolean("AUTHENTICATED", false)
     }
 
-    fun getAccessToken(): String {
+    override fun getAccessToken(): String {
         return prefs.getString(ACCESS_TOKEN_KEY, "")
     }
 
-    fun getToken(): AccessToken {
+    override fun getToken(): AccessToken {
         return AccessToken(
                 prefs.getString(ACCESS_TOKEN_KEY, ""),
                 prefs.getString(TOKEN_TYPE_KEY, ""),
@@ -41,7 +41,7 @@ class TokenDatabase(val context: Context) {
         )
     }
 
-    fun saveToken(accessToken: AccessToken) {
+    override fun saveToken(accessToken: AccessToken) {
         val editor = prefs.edit()
         editor.putString(ACCESS_TOKEN_KEY, accessToken.access_token)
         editor.putString(TOKEN_TYPE_KEY, accessToken.token_type)
