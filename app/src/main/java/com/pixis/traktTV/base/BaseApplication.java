@@ -10,8 +10,6 @@ import com.pixis.traktTV.injection.ApplicationComponent;
 import com.pixis.traktTV.injection.DaggerApplicationComponent;
 import com.pixis.traktTV.injection.NetworkModule;
 
-import org.jetbrains.annotations.NotNull;
-
 import javax.inject.Inject;
 
 import timber.log.Timber;
@@ -58,8 +56,4 @@ public class BaseApplication extends Application {
         }
     }
 
-    @NotNull
-    public static String getAccessToken() {
-        return null;
-    }
 }
