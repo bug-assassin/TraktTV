@@ -44,6 +44,8 @@ dependencies {
     compile project (':trakt-api')
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile "com.jakewharton.timber:timber:$timber_version"
+
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
 repositories {
     mavenCentral()

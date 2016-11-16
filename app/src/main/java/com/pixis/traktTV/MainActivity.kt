@@ -8,10 +8,17 @@ import com.pixis.traktTV.adapters.TrackedItemAdapter
 import com.pixis.traktTV.base.BaseActivity
 import com.pixis.traktTV.data.models.TrackedItem
 import com.pixis.traktTV.views.AdvancedRecyclerView
+import com.pixis.trakt_api.FanArtAPI
 import com.pixis.trakt_api.Token.TokenDatabase
+import com.pixis.trakt_api.image_api.FanArtImages
+import com.pixis.trakt_api.image_api.FanArtMedia
+import com.pixis.trakt_api.image_api.ImageLoading
+import com.pixis.trakt_api.network_models.TraktShow
 import com.pixis.trakt_api.services.Sync
 import com.pixis.trakt_api.utils.applySchedulers
+import com.pixis.trakt_api.utils.asPair
 import rx.Observable
+import timber.log.Timber
 import javax.inject.Inject
 
 //List of tracked movies and tv shows
@@ -32,8 +39,16 @@ class MainActivity : BaseActivity() {
     @Inject
     lateinit var syncService: Sync
 
+    lateinit var imageLoadingAPI: ImageLoading
+
     override fun init(savedInstanceState: Bundle?) {
         getComponent().inject(this)
+        //TODO move to dagger
+        val fanArtApi = FanArtAPI()
+        val okHttp = fanArtApi.createOkHttpClient().build()
+        val imageRetrofit = fanArtApi.createRetrofit(okHttp).build()
+        imageLoadingAPI = imageRetrofit.create(ImageLoading::class.java)
+
 
         trackedItemAdapter = TrackedItemAdapter(this, null)
         recyclerView.setAdapter(trackedItemAdapter)
@@ -41,19 +56,30 @@ class MainActivity : BaseActivity() {
         if (!tokenDatabase.isAuthenticated()) {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
+        } else {
+            loadData()
         }
-        else {
-            loadData();
+
+        if (BuildConfig.DEBUG) {
+            Timber.d("ACCESS TOKEN %s", tokenDatabase.getAccessToken())
         }
+
         fabMainAction.setOnClickListener { loadData() }
+
     }
 
     private fun loadData() {
         syncService.getWatchListShows()
                 .flatMap {
-                    Observable.from(it).map({ show -> TrackedItem(show.show.title) }).toList()
+                    Observable.from(it)
                 }
+                .flatMap {
+                    Observable.just(it).withLatestFrom(imageLoadingAPI.getImages(FanArtMedia.SHOW, it.show.ids.tvdb), asPair<TraktShow, FanArtImages>())
+                }
+                .map { it -> TrackedItem(title = it.first.show.title, imagePath = it.second.getPosterPath()) }
+                .toList()
                 .applySchedulers()
+                .first()
                 .subscribe {
                     trackedItemAdapter.setData(it)
                 }

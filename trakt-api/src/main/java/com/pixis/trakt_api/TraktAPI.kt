@@ -11,9 +11,9 @@ import retrofit2.converter.moshi.MoshiConverterFactory
  * Created by Dan on 11/11/2016.
  */
 class TraktAPI(val tokenStorage: TokenStorage) {
-    fun createOkHttpClient(client_id: String): OkHttpClient.Builder {
+    fun createOkHttpClient(client_id: String, loggingLevel : HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.NONE): OkHttpClient.Builder {
         val logging = HttpLoggingInterceptor()
-        logging.level = HttpLoggingInterceptor.Level.BODY
+        logging.level = loggingLevel
 
         val okHttpClient = OkHttpClient.Builder()
         okHttpClient.addInterceptor { chain ->

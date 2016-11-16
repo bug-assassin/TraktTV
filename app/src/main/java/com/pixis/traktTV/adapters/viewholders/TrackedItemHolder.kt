@@ -8,6 +8,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.pixis.traktTV.R
 import com.pixis.traktTV.data.models.TrackedItem
+import com.squareup.picasso.Picasso
 
 /**
  * Created by Dan on 11/9/2016.
@@ -27,5 +28,6 @@ class TrackedItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(trackedItem: TrackedItem) {
         txtTitle.text = trackedItem.title
+        Picasso.with(itemView.context).load(trackedItem.imagePath).into(imgItem)
     }
 }
