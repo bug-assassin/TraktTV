@@ -8,7 +8,6 @@ import com.pixis.traktTV.adapters.TrackedItemAdapter
 import com.pixis.traktTV.base.BaseActivity
 import com.pixis.traktTV.data.models.TrackedItem
 import com.pixis.traktTV.views.AdvancedRecyclerView
-import com.pixis.trakt_api.FanArtAPI
 import com.pixis.trakt_api.Token.TokenDatabase
 import com.pixis.trakt_api.image_api.FanArtImages
 import com.pixis.trakt_api.image_api.FanArtMedia
@@ -39,16 +38,11 @@ class MainActivity : BaseActivity() {
     @Inject
     lateinit var syncService: Sync
 
+    @Inject
     lateinit var imageLoadingAPI: ImageLoading
 
     override fun init(savedInstanceState: Bundle?) {
         getComponent().inject(this)
-        //TODO move to dagger
-        val fanArtApi = FanArtAPI()
-        val okHttp = fanArtApi.createOkHttpClient().build()
-        val imageRetrofit = fanArtApi.createRetrofit(okHttp).build()
-        imageLoadingAPI = imageRetrofit.create(ImageLoading::class.java)
-
 
         trackedItemAdapter = TrackedItemAdapter(this, null)
         recyclerView.setAdapter(trackedItemAdapter)

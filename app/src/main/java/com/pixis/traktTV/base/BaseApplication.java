@@ -31,11 +31,12 @@ public class BaseApplication extends Application {
         Bundle manifestBundle = getManifestBundle();
         String client_id = manifestBundle.getString("TRAKT_CLIENT_ID");
         String api_target = manifestBundle.getString("TRAKT_API_TARGET");
+        String fanart_api_key = manifestBundle.getString("FAN_ART_API_KEY");
 
         daggerApplicationComponent = DaggerApplicationComponent
                 .builder()
                 .appModule(new AppModule(this, api_target, client_id))
-                .networkModule(new NetworkModule())
+                .networkModule(new NetworkModule(fanart_api_key))
                 .build();
         daggerApplicationComponent.inject(this);
 

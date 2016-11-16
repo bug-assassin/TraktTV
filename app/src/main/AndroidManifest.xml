@@ -25,6 +25,7 @@
             android:value="ca.uottawa" />
         <meta-data android:name="TRAKT_CLIENT_ID" android:value="@string/client_id"/>
         <meta-data android:name="TRAKT_API_TARGET" android:value="@string/api_target" />
+        <meta-data android:name="FAN_ART_API_KEY" android:value="@string/fanart_api_key" />
 
         <activity android:name=".MainActivity">
             <intent-filter>

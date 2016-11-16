@@ -9,8 +9,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 /**
  * Created by Dan on 11/11/2016.
  */
-//TODO remove api key from here
-class FanArtAPI(val fanArtApiKey : String = "c9a9bbee5c1550e6556dbf36d6d25dbd") {
+class FanArtAPI(val fanArtApiKey : String) {
 
     val baseUrl : String = "http://webservice.fanart.tv/v3/"
 
