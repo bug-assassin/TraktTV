@@ -12,6 +12,7 @@ import com.pixis.trakt_api.Token.TokenDatabase
 import com.pixis.trakt_api.image_api.FanArtImages
 import com.pixis.trakt_api.image_api.FanArtMedia
 import com.pixis.trakt_api.image_api.ImageLoading
+import com.pixis.trakt_api.models.Episode
 import com.pixis.trakt_api.network_models.TraktShow
 import com.pixis.trakt_api.services.Sync
 import com.pixis.trakt_api.utils.applySchedulers
@@ -70,13 +71,18 @@ class MainActivity : BaseActivity() {
                 .flatMap {
                     Observable.just(it).withLatestFrom(imageLoadingAPI.getImages(FanArtMedia.SHOW, it.show.ids.tvdb), asPair<TraktShow, FanArtImages>())
                 }
-                .map { it -> TrackedItem(title = it.first.show.title, imagePath = it.second.getPosterPath()) }
+                .map { it -> TrackedItem(title = it.first.show.title, poster_path = it.second.tvposter[0].preview_url, episode = Episode(title = "Test", episode_number = "S02E3", release_date = "Tomorrow")) }
                 .toList()
                 .applySchedulers()
                 .first()
-                .subscribe {
-                    trackedItemAdapter.setData(it)
-                }
+                .subscribe(
+                        {
+                            trackedItemAdapter.setData(it)
+                        },
+                        { error ->
+                            error.printStackTrace()
+                        }
+                )
     }
 
 }

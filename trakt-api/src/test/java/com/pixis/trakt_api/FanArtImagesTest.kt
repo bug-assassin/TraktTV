@@ -1,5 +1,6 @@
 package com.pixis.trakt_api
 
+import com.pixis.trakt_api.image_api.FanArtImage
 import com.pixis.trakt_api.image_api.FanArtMedia
 import com.pixis.trakt_api.image_api.ImageLoading
 import okhttp3.logging.HttpLoggingInterceptor
@@ -24,6 +25,16 @@ class FanArtImagesTest {
     }
 
     @Test
+    fun TestFanArtPreviewImage() {
+        val url = "test/fanart/"
+        val preview_url = "test/preview/"
+
+        val fanArtImage = FanArtImage(id = "a", url = url, lang = "en", likes = 1, season = "all")
+
+        assert(fanArtImage.preview_url == preview_url)
+    }
+
+    @Test
     fun TestImageLoading() {
         val showId = 296762
         val showName = "Westworld"
@@ -41,6 +52,9 @@ class FanArtImagesTest {
         assert(loadedImages.showbackground.size > 0)
         assert(loadedImages.tvbanner.size > 0)
         assert(loadedImages.tvposter.size > 0)
+        assert(loadedImages.tvposter[0].url != null)
+        assert(loadedImages.tvposter[0].preview_url != null)
+
         assert(loadedImages.tvthumb.size > 0)
     }
 

@@ -1,12 +1,11 @@
 package com.pixis.trakt_api
 
 import com.pixis.trakt_api.Token.TokenStorage
+import com.pixis.trakt_api.jackson.JacksonConverterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
-
 /**
  * Created by Dan on 11/11/2016.
  */
@@ -59,7 +58,7 @@ class TraktAPI(val tokenStorage: TokenStorage) {
                 .baseUrl(baseUrl)
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(MoshiConverterFactory.create())
+                .addConverterFactory(JacksonConverterFactory.create())
     }
 
     fun refreshToken() : String {
