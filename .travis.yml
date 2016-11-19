@@ -11,15 +11,15 @@ android:
   - addon-google_apis-google-19
 script:
 - "./gradlew build"
-env:
-  global:
-    secure: blgSloF9tsKOQzGq9a7mIvoMm2zLn5eWmqJ4rsHwBjI80wjkJlhIiGZlaiilDz165mgjFLZQQnd64eS+4J3aSp9nTMvxmSI7gwK11ofatIhxQczSxCIYJGt2HFNR2te7659/Mlkmpwn1g7iNifFQWoYW8ZFkNgWAZOP0cS8xdpSdIy8KYvJtNc2pBiYAnEOfJ9va2iVUyjmCF0MooDycfmYPFlryEqbWoJ1M7aIV5u/a4Xl6vC3XJbPk7hDdYapqCQ5N4yP4Rio84+C1tj5mAktu2Pw0ffHk4FrmGVracJSRh+lmds6Pkpu0r35PqVrKhRLdbZbAQeP79yp0OPeTOPO8733V2XjkYt7AtKzeYlHzzfHDUmR9Ns8QgSZxkhXfb+WlY1utfjl5E2lDU19sqLLOCT29tSSn6YePKYEHtllAL5IzScbRp50/sf5+vQ1kNDfqgjvfFM7+S4iu5oSOWAqq5zCnVLlUG/1FXCwV/AvbPbMqXuAqwMO6HduEscnKFQrXIN3Dqgb3bU0DAd9jJqhJrFZX2girKjuOVigFFuvVkWJfpIBXd6TMx09o+hAs3JkjtL6Dr3rLoFtrOrfhefZyuRaN6mTYJyzqz5ORO0veWC1zGtMM+fi06EMecjCw73viJ4htMmekEV2bpT6hyHeRkFe0RavsczxGyqCG34g=
 before_install:
- - chmod +x gradlew
+- chmod +x gradlew
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+env:
+  global:
+    secure: VbxxmTqYVYqoKLDN2GZi1Zxwf1UENyJk51KatCqRX470G7IVAdUGtCiUJJ6YbgCcNPmlPG3ZJO5RFYBt6Q/nDggrr4SVRCoAyfaYpwZ2McZKWTKtW4xrDOE9HwYSs5CkircySnAloxkAsPvhfgOZdoVBVAC6QdnJp6qy54UjOEHbfonzPBSX0eCoz5yH77iMA0QXBVzKIiXZav1P7+JH1YyxFAIUKu9Hwf1R+vbVpWYPvUEZc/xnNOOb2QGS0eeUAc2zxQ7CTvfWaoHhujeS/HzrtloKmWnrI1mK78PElRXz0tyQC46A4xS3jCZKaZ89xKIceKJucp+JcJ4qKHeWo8loLMjfNHDz2nI1LQItOQLs2a1LXIP8qjJxm1Ra1I9cFT2tp6otq3aHPRTlFiOeOj9ErBpQKdCYtigOv1GJE3fQpulY2G7OJM/wC48vFlqz26RDynMWJfOC7I0eK5kClUszo8TocfZ/KUaPjKlNVD2QAHWmGtP3ulmfv4vR0msiZg6nkxmqEF1pW72BiwH+X9ZuYGQVJqPdeVNzGgIF4PLGU8lhNkV1oPZUp7TCtJabYV5A6kE+UlyET5j0caXYsONrElIXPoUiIckFwKpROLLZgdnBkNxE1ytqIdVMGuGZij//t6fx5KLAIM1lya2ULSgryTqqrynDPMiVi3kRI0A=
