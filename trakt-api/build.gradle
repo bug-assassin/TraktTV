@@ -16,7 +16,7 @@ android {
     }
     buildTypes {
         buildTypes.each {
-            it.buildConfigField "String", "MOCK_AUTHENTICATION_TOKEN", project.hasProperty("MOCK_AUTHENTICATION_TOKEN") ? MOCK_AUTHENTICATION_TOKEN : System.getenv('MOCK_AUTHENTICATION_TOKEN')
+            it.buildConfigField "String", "MOCK_AUTHENTICATION_TOKEN", project.hasProperty("MOCK_AUTHENTICATION_TOKEN") ? "\"${project.getProperty('MOCK_AUTHENTICATION_TOKEN')}\"" : "\"${System.getenv('MOCK_AUTHENTICATION_TOKEN')}\""
         }
         release {
             minifyEnabled false
@@ -27,7 +27,6 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 }
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
