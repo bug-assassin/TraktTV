@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+	<issue id="ResourceType">
+		<!-- Remove this when this is fixed: https://github.com/JakeWharton/butterknife/issues/338 -->
+		<ignore path="**/*_ViewBinding.java" />
+	</issue>
+	<issue id="InvalidPackage" severity="error">
+         <ignore regexp="okio.*jar"/>
+         <ignore regexp="retrofit-2.1.0.jar"/>
+    </issue>
+	
+</lint>
