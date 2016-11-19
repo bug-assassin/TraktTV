@@ -1,12 +1,5 @@
 <resources>
     <string name="app_name">TraktTV</string>
-    <string name="hello">Hello Steven</string>
-    <string name="no_recipes">No Recipes</string>
-    <string name="main_screen_title">Recipes</string>
-    <string name="dialog_delete_title">Confirm</string>
-    <string name="dialog_delete_message">Do you want to delete this recipe?</string>
-    <string name="dialog_delete_confirm">Delete</string>
-
 
     <string name="api_target">https://api.trakt.tv</string>
     <string name="client_id">fdacbaf7fe41bc6d5bf179a4a2f3d261a5ff5d8ae2e9fcc9eef48b37bb043c20</string>
@@ -14,4 +7,8 @@
     <string name="redirect_url">urn:ietf:wg:oauth:2.0:oob</string>
 
     <string name="fanart_api_key">c9a9bbee5c1550e6556dbf36d6d25dbd</string>
+
+    <string name="no_items_in_watchlist">WatchList is Empty</string>
+    <string name="menu_refresh">Refresh</string>
+    <string name="error_message">An internal error has occurred</string>
 </resources>

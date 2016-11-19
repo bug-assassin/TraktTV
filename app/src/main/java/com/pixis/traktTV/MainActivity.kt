@@ -3,11 +3,15 @@ package com.pixis.traktTV
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
+import android.support.v4.widget.SwipeRefreshLayout
+import android.view.Menu
+import android.view.MenuItem
 import butterknife.BindView
 import com.pixis.traktTV.adapters.TrackedItemAdapter
 import com.pixis.traktTV.base.BaseActivity
 import com.pixis.traktTV.data.models.TrackedItem
 import com.pixis.traktTV.views.AdvancedRecyclerView
+import com.pixis.traktTV.views.Utils
 import com.pixis.trakt_api.Token.TokenDatabase
 import com.pixis.trakt_api.image_api.FanArtImages
 import com.pixis.trakt_api.image_api.FanArtMedia
@@ -59,17 +63,35 @@ class MainActivity : BaseActivity() {
             Timber.d("ACCESS TOKEN %s", tokenDatabase.getAccessToken())
         }
 
-        fabMainAction.setOnClickListener { loadData() }
+        recyclerView.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener { loadData() })
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.menu_refresh) {
+            loadData()
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     private fun loadData() {
+        recyclerView.setRefreshing(true)
+
         syncService.getWatchListShows()
                 .flatMap {
                     Observable.from(it)
                 }
                 .flatMap {
-                    Observable.just(it).withLatestFrom(imageLoadingAPI.getImages(FanArtMedia.SHOW, it.show.ids.tvdb), asPair<TraktShow, FanArtImages>())
+                    val show = Observable.just(it)
+                    val showImage = imageLoadingAPI.getImages(FanArtMedia.SHOW, it.show.ids.tvdb)
+                    return@flatMap Observable.combineLatest(show, showImage, asPair<TraktShow, FanArtImages>())
                 }
                 .map { it -> TrackedItem(title = it.first.show.title, poster_path = it.second.tvposter[0].preview_url, episode = Episode(title = "Test", episode_number = "S02E3", release_date = "Tomorrow")) }
                 .toList()
@@ -78,9 +100,10 @@ class MainActivity : BaseActivity() {
                 .subscribe(
                         {
                             trackedItemAdapter.setData(it)
+                            recyclerView.setRefreshing(false)
                         },
                         { error ->
-                            error.printStackTrace()
+                            Utils.showAndLogError(getContext(), error)
                         }
                 )
     }

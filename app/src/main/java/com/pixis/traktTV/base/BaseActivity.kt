@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import butterknife.ButterKnife
 import com.pixis.traktTV.injection.ApplicationComponent
 
+
+
 /**
  * Created by Dan on 11/14/2016.
  */
@@ -29,4 +31,5 @@ abstract class BaseActivity : AppCompatActivity(), ActivityFragmentCommon {
     fun getContext(): Context {
         return this
     }
+
 }
