@@ -2,7 +2,7 @@
 
 Android app that notifies you when the next episode of your trakt watchlist airs.
 
-<img src="screenshots/main_screen.png" width="100%" />
+<img src="screenshots/main_screen.png" width="49%" />
 
 <!--
 200x285 poster size
