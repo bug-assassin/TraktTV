@@ -16,7 +16,7 @@ android {
     }
     buildTypes {
         buildTypes.each {
-            it.buildConfigField "String", "MOCK_AUTHENTICATION_TOKEN", hasProperty('MOCK_AUTHENTICATION_TOKEN') ? MOCK_AUTHENTICATION_TOKEN : System.getenv('MOCK_AUTHENTICATION_TOKEN')
+            it.buildConfigField "String", "MOCK_AUTHENTICATION_TOKEN", project.hasProperty("MOCK_AUTHENTICATION_TOKEN") ? MOCK_AUTHENTICATION_TOKEN : System.getenv('MOCK_AUTHENTICATION_TOKEN')
         }
         release {
             minifyEnabled false
