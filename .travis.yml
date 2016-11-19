@@ -2,22 +2,15 @@ language: android
 jdk: oraclejdk8
 android:
   components:
-    # Uncomment the lines below if you want to
-    # use the latest revision of Android SDK Tools
-    - platform-tools
-    - tools
-
-    # The BuildTools version used by your project
-    - build-tools-25.0.0
-
-    # The SDK version used to compile your project
-    - android-24
-
-    # Additional components
-    #- extra-google-google_play_services
-    - extra-google-m2repository
-    - extra-android-m2repository
-    - addon-google_apis-google-19
-
+  - platform-tools
+  - tools
+  - build-tools-25.0.0
+  - android-24
+  - extra-google-m2repository
+  - extra-android-m2repository
+  - addon-google_apis-google-19
 script:
-  - ./gradlew build
+- "./gradlew build"
+env:
+  global:
+    secure: blgSloF9tsKOQzGq9a7mIvoMm2zLn5eWmqJ4rsHwBjI80wjkJlhIiGZlaiilDz165mgjFLZQQnd64eS+4J3aSp9nTMvxmSI7gwK11ofatIhxQczSxCIYJGt2HFNR2te7659/Mlkmpwn1g7iNifFQWoYW8ZFkNgWAZOP0cS8xdpSdIy8KYvJtNc2pBiYAnEOfJ9va2iVUyjmCF0MooDycfmYPFlryEqbWoJ1M7aIV5u/a4Xl6vC3XJbPk7hDdYapqCQ5N4yP4Rio84+C1tj5mAktu2Pw0ffHk4FrmGVracJSRh+lmds6Pkpu0r35PqVrKhRLdbZbAQeP79yp0OPeTOPO8733V2XjkYt7AtKzeYlHzzfHDUmR9Ns8QgSZxkhXfb+WlY1utfjl5E2lDU19sqLLOCT29tSSn6YePKYEHtllAL5IzScbRp50/sf5+vQ1kNDfqgjvfFM7+S4iu5oSOWAqq5zCnVLlUG/1FXCwV/AvbPbMqXuAqwMO6HduEscnKFQrXIN3Dqgb3bU0DAd9jJqhJrFZX2girKjuOVigFFuvVkWJfpIBXd6TMx09o+hAs3JkjtL6Dr3rLoFtrOrfhefZyuRaN6mTYJyzqz5ORO0veWC1zGtMM+fi06EMecjCw73viJ4htMmekEV2bpT6hyHeRkFe0RavsczxGyqCG34g=
