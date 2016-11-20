@@ -12,6 +12,8 @@ import com.pixis.traktTV.injection.NetworkModule;
 
 import javax.inject.Inject;
 
+import rx.functions.Action1;
+import rx.plugins.RxJavaHooks;
 import timber.log.Timber;
 
 /**
@@ -41,6 +43,13 @@ public class BaseApplication extends Application {
         daggerApplicationComponent.inject(this);
 
         Timber.plant(tree);
+
+        RxJavaHooks.setOnError(new Action1<Throwable>() {
+            @Override
+            public void call(Throwable throwable) {
+                Timber.e(throwable);
+            }
+        });
     }
 
     public ApplicationComponent getComponent() {

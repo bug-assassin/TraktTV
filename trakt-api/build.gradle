@@ -25,6 +25,7 @@ android {
     }
     lintOptions {
         lintConfig rootProject.file('lint.xml')
+		abortOnError false
     }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'

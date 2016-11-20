@@ -52,7 +52,9 @@ class FanArtImagesTest {
         assert(loadedImages.showbackground.size > 0)
         assert(loadedImages.tvbanner.size > 0)
         assert(loadedImages.tvposter.size > 0)
+        @Suppress("SENSELESS_COMPARISON")
         assert(loadedImages.tvposter[0].url != null)
+        @Suppress("SENSELESS_COMPARISON")
         assert(loadedImages.tvposter[0].preview_url != null)
 
         assert(loadedImages.tvthumb.size > 0)

@@ -4,6 +4,8 @@ import com.pixis.traktTV.LoginActivity;
 import com.pixis.traktTV.MainActivity;
 import com.pixis.traktTV.base.BaseApplication;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -15,6 +17,7 @@ import dagger.Component;
 @Component(modules = { AppModule.class, NetworkModule.class })
 public interface ApplicationComponent {
     void inject(MainActivity activity);
-    void inject(BaseApplication application);
     void inject(LoginActivity loginActivity);
+
+    void inject(@NotNull BaseApplication baseApplication);
 }
