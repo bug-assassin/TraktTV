@@ -2,8 +2,11 @@ package com.pixis.traktTV.injection;
 
 import android.app.Application;
 
+import com.pixis.traktTV.repository.RemoteRepository;
 import com.pixis.trakt_api.Token.TokenDatabase;
 import com.pixis.trakt_api.TraktAPI;
+import com.pixis.trakt_api.image_api.ImageLoading;
+import com.pixis.trakt_api.services.Sync;
 
 import javax.inject.Singleton;
 
@@ -70,4 +73,9 @@ public class AppModule {
         return factory.createRetrofit(okHttpClient, baseUrl).build();
     }
 
+    @Singleton
+    @Provides
+    RemoteRepository providesRemoteRepo(Sync sync, ImageLoading imageLoading) {
+        return new RemoteRepository(sync, imageLoading);
+    }
 }

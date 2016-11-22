@@ -9,9 +9,12 @@ import com.pixis.traktTV.injection.AppModule;
 import com.pixis.traktTV.injection.ApplicationComponent;
 import com.pixis.traktTV.injection.DaggerApplicationComponent;
 import com.pixis.traktTV.injection.NetworkModule;
+import com.pixis.trakt_api.realmmodule.TraktRealmLibraryModule;
 
 import javax.inject.Inject;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import rx.functions.Action1;
 import rx.plugins.RxJavaHooks;
 import timber.log.Timber;
@@ -35,6 +38,7 @@ public class BaseApplication extends Application {
         String api_target = manifestBundle.getString("TRAKT_API_TARGET");
         String fanart_api_key = manifestBundle.getString("FAN_ART_API_KEY");
 
+        //Injection
         daggerApplicationComponent = DaggerApplicationComponent
                 .builder()
                 .appModule(new AppModule(this, api_target, client_id))
@@ -42,8 +46,19 @@ public class BaseApplication extends Application {
                 .build();
         daggerApplicationComponent.inject(this);
 
+        //Timber
         Timber.plant(tree);
 
+        //Realm
+        Realm.init(this);
+        RealmConfiguration config = new RealmConfiguration.Builder()
+                .name("trakt_data.realm")
+                .modules(Realm.getDefaultModule(), new TraktRealmLibraryModule())
+                .deleteRealmIfMigrationNeeded()//TODO proper migration
+                .build();
+        Realm.setDefaultConfiguration(config);
+
+        //RxJava Error Logging
         RxJavaHooks.setOnError(new Action1<Throwable>() {
             @Override
             public void call(Throwable throwable) {

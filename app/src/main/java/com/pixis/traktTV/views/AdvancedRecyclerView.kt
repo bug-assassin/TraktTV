@@ -48,9 +48,9 @@ class AdvancedRecyclerView : LinearLayout {
         }
 
         val v = LayoutInflater.from(context).inflate(R.layout.advanced_recyclerview, this, false)
-        recyclerView = v.findViewById(R.id.recyclerView) as RecyclerView
-        emptyView = v.findViewById(R.id.emptyView)
-        swipeRefreshLayout = v.findViewById(R.id.refreshContainer) as SwipeRefreshLayout
+        recyclerView = v.findViewById(R.id.advanced_recyclerview_recyclerView) as RecyclerView
+        emptyView = v.findViewById(R.id.advanced_recyclerview_emptyView)
+        swipeRefreshLayout = v.findViewById(R.id.advanced_recyclerview_refreshContainer) as SwipeRefreshLayout
 
         //Init recyclerview
         val layoutManager = LinearLayoutManager(context)

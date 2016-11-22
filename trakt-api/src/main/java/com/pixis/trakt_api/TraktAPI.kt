@@ -10,6 +10,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
  * Created by Dan on 11/11/2016.
  */
 class TraktAPI(val tokenStorage: TokenStorage) {
+
     fun createOkHttpClient(client_id: String, loggingLevel : HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.NONE): OkHttpClient.Builder {
         val logging = HttpLoggingInterceptor()
         logging.level = loggingLevel
@@ -36,6 +37,15 @@ class TraktAPI(val tokenStorage: TokenStorage) {
 
             return@addInterceptor chain.proceed(newRequest)
         }
+
+        //Error Handler
+        /*okHttpClient.addInterceptor { chain ->
+            if(!NetworkConnection.isConnected(context)) {
+                throw NoInternetAvailableException()
+            }
+
+            chain.proceed(chain.request())
+        }*/
 
         //Authenticator refreshes the token
         /*okHttpClient.authenticator { route, response ->

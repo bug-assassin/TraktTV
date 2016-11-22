@@ -1,13 +1,15 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
+apply plugin: 'realm-android'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "$build_tools_version"
+    compileSdkVersion rootProject.sdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion rootProject.sdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -32,12 +34,11 @@ android {
     }
 }
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    //compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    testCompile 'junit:junit:4.12'
+    testCompile "junit:junit:4.12"
 
     compile "io.reactivex:rxjava:$rxjava_version"
     compile "io.reactivex:rxandroid:$rxandroid_version"

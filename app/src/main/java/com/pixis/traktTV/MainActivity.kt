@@ -10,19 +10,17 @@ import butterknife.BindView
 import com.pixis.traktTV.adapters.TrackedItemAdapter
 import com.pixis.traktTV.base.BaseActivity
 import com.pixis.traktTV.data.models.TrackedItem
+import com.pixis.traktTV.repository.LocalRepository
+import com.pixis.traktTV.repository.RemoteRepository
+import com.pixis.traktTV.repository.Repository
 import com.pixis.traktTV.views.AdvancedRecyclerView
 import com.pixis.traktTV.views.Utils
 import com.pixis.trakt_api.Token.TokenDatabase
-import com.pixis.trakt_api.image_api.FanArtImages
-import com.pixis.trakt_api.image_api.FanArtMedia
-import com.pixis.trakt_api.image_api.ImageLoading
-import com.pixis.trakt_api.models.Episode
-import com.pixis.trakt_api.network_models.TraktShow
-import com.pixis.trakt_api.services.Sync
-import com.pixis.trakt_api.utils.applySchedulers
-import com.pixis.trakt_api.utils.asPair
+import io.realm.Realm
 import rx.Observable
+import rx.Subscription
 import timber.log.Timber
+import java.io.IOException
 import javax.inject.Inject
 
 //List of tracked movies and tv shows
@@ -31,39 +29,53 @@ class MainActivity : BaseActivity() {
 
     @BindView(R.id.recyclerView)
     lateinit var recyclerView: AdvancedRecyclerView
-
-    lateinit var trackedItemAdapter: TrackedItemAdapter
-
     @BindView(R.id.fabMainAction)
     lateinit var fabMainAction: FloatingActionButton
+    lateinit var trackedItemAdapter: TrackedItemAdapter
 
     @Inject
     lateinit var tokenDatabase: TokenDatabase
 
     @Inject
-    lateinit var syncService: Sync
+    lateinit var remoteRepository: RemoteRepository
 
-    @Inject
-    lateinit var imageLoadingAPI: ImageLoading
+    //TODO move to dagger
+    lateinit var localRepository: LocalRepository
+    lateinit var repository: Repository
+    lateinit var mRealm: Realm
+
+    var request: Observable<List<TrackedItem>>? = null
+    var subscription: Subscription? = null
 
     override fun init(savedInstanceState: Bundle?) {
         getComponent().inject(this)
 
-        trackedItemAdapter = TrackedItemAdapter(this, null)
-        recyclerView.setAdapter(trackedItemAdapter)
-
         if (!tokenDatabase.isAuthenticated()) {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
-        } else {
-            loadData()
+            return
         }
+
+        mRealm = Realm.getDefaultInstance()
+        localRepository = LocalRepository(mRealm)
+        repository = Repository(remoteRepository, localRepository)
+
+        trackedItemAdapter = TrackedItemAdapter(this, null)
+        recyclerView.setAdapter(trackedItemAdapter)
 
         if (BuildConfig.DEBUG) {
             Timber.d("ACCESS TOKEN %s", tokenDatabase.getAccessToken())
         }
 
-        recyclerView.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener { loadData() })
+        recyclerView.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener { loadData(forceUpdate = true) })
+
+        //Load initial Data
+        loadDataShowRefreshing()
+    }
+
+    private fun loadDataShowRefreshing() {
+        recyclerView.setRefreshing(true)
+        loadData()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -73,39 +85,37 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.menu_refresh) {
-            loadData()
+        if (item.itemId == R.id.menu_refresh) {
+            loadDataShowRefreshing()
             return true
         }
 
         return super.onOptionsItemSelected(item)
     }
 
-    private fun loadData() {
-        recyclerView.setRefreshing(true)
+    private fun loadData(forceUpdate: Boolean = false) {
+        subscription?.unsubscribe()
+        request = repository.getWatchList(forceUpdate)
 
-        syncService.getWatchListShows()
-                .flatMap {
-                    Observable.from(it)
-                }
-                .flatMap {
-                    val show = Observable.just(it)
-                    val showImage = imageLoadingAPI.getImages(FanArtMedia.SHOW, it.show.ids.tvdb)
-                    return@flatMap Observable.combineLatest(show, showImage, asPair<TraktShow, FanArtImages>())
-                }
-                .map { it -> TrackedItem(title = it.first.show.title, poster_path = it.second.tvposter[0].preview_url, episode = Episode(title = "Test", episode_number = "S02E3", release_date = "Tomorrow")) }
-                .toList()
-                .applySchedulers()
-                .first()
-                .subscribe(
-                        {
-                            trackedItemAdapter.setData(it)
-                            recyclerView.setRefreshing(false)
-                        },
-                        { error ->
-                            Utils.showAndLogError(getContext(), error)
-                        }
-                )
+        subscription = request
+                ?.doOnNext { recyclerView.setRefreshing(false) }
+                ?.doAfterTerminate { recyclerView.setRefreshing(false) }
+                ?.subscribe({
+                    trackedItemAdapter.setData(it)
+                }, { error ->
+                    if(error is IOException) {
+                        Utils.showError(getContext(), "No Internet Connection")
+                    }
+                    else {
+                        Utils.showError(getContext())
+                        Timber.e(error)
+                    }
+                })
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mRealm.close()
+        subscription?.unsubscribe()
+    }
 }

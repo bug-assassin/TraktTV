@@ -6,12 +6,12 @@
     android:orientation="vertical">
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/refreshContainer"
+        android:id="@+id/advanced_recyclerview_refreshContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/advanced_recyclerview_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="visible"
@@ -20,7 +20,7 @@
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <RelativeLayout
-        android:id="@+id/emptyView"
+        android:id="@+id/advanced_recyclerview_emptyView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
@@ -36,7 +36,7 @@
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/ic_no_recipes" />
+                android:src="@drawable/ic_no_watchlist_items" />
 
             <TextView
                 android:layout_width="wrap_content"

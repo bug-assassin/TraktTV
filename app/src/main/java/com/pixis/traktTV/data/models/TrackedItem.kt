@@ -1,9 +1,20 @@
 package com.pixis.traktTV.data.models
 
-import com.pixis.trakt_api.models.Episode
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
 
 /**
  * Created by Dan on 11/14/2016.
  */
+open class TrackedItem(
+        @PrimaryKey
+        open var traktId: String = "",
+        //@Suppress("CanBeParameter") open var ids: Ids = Ids(),
+        open var title: String = "",
+        open var poster_path: String = "",
+        open var episode: Episode = Episode()) : RealmObject() {
 
-data class TrackedItem(val title : String, val poster_path: String, val episode : Episode)
+    /*@PrimaryKey
+    open var traktId: String = ids.trakt*/
+
+}

@@ -1,13 +1,16 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
+apply plugin: 'realm-android'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "$build_tools_version"
+    compileSdkVersion rootProject.sdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
     defaultConfig {
         applicationId 'com.pixis.traktv'
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion rootProject.sdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -40,23 +43,24 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile 'junit:junit:4.12'
+    testCompile "junit:junit:4.12"
 
+    //Support Library
     compile "com.android.support:appcompat-v7:$support_library_version"
+    compile "com.android.support:recyclerview-v7:$support_library_version"
+    compile "com.android.support:design:$support_library_version"
+
     compile "com.jakewharton:butterknife:$butterknife_version"
     kapt "com.jakewharton:butterknife-compiler:$butterknife_version"
 
     compile "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
-    compile "com.android.support:recyclerview-v7:$support_library_version"
-    compile "com.android.support:design:$support_library_version"
-
-    compile project(':trakt-api')
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile "com.jakewharton.timber:timber:$timber_version"
-
     compile 'com.squareup.picasso:picasso:2.5.2'
+
+    compile project(':trakt-api')
 }
 repositories {
     mavenCentral()
