@@ -5,10 +5,12 @@ android:
   - platform-tools
   - tools
   - build-tools-25.0.0
-  - android-24
+  - android-25
   - extra-google-m2repository
   - extra-android-m2repository
   - addon-google_apis-google-19
+  licenses:
+  - android-sdk-license-5be876d5
 script:
 - "./gradlew build"
 before_install:

@@ -17,7 +17,7 @@ import com.pixis.traktTV.R
  * Created by Dan on 11/9/2016.
  */
 
-class AdvancedRecyclerView : LinearLayout {
+open class AdvancedRecyclerView : LinearLayout {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var emptyView: View

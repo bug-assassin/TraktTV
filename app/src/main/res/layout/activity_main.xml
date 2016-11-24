@@ -5,7 +5,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".screen_main.MainActivity">
 
     <com.pixis.traktTV.views.AdvancedRecyclerView
         android:id="@+id/recyclerView"

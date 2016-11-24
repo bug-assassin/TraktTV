@@ -1,4 +1,4 @@
-package com.pixis.traktTV.views
+package com.pixis.traktTV.screen_login.views
 
 import android.app.Activity
 import android.app.DialogFragment
@@ -15,6 +15,8 @@ import butterknife.BindString
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.pixis.traktTV.R
+import com.pixis.traktTV.views.hide
+import com.pixis.traktTV.views.show
 import timber.log.Timber
 
 /**
@@ -40,7 +42,7 @@ class AuthDialog(val listener: AuthDialogResultListener) : DialogFragment() {
     companion object {
         fun newInstance(listener : AuthDialogResultListener) : AuthDialog {
             val authDialog = AuthDialog(listener)
-            authDialog.setStyle(DialogFragment.STYLE_NO_FRAME, android.R.style.Theme_DeviceDefault_Dialog)
+            authDialog.setStyle(STYLE_NO_FRAME, android.R.style.Theme_DeviceDefault_Dialog)
             return authDialog
         }
     }

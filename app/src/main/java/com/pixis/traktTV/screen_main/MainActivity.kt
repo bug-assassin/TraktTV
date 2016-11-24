@@ -1,4 +1,4 @@
-package com.pixis.traktTV
+package com.pixis.traktTV.screen_main
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,12 +7,15 @@ import android.support.v4.widget.SwipeRefreshLayout
 import android.view.Menu
 import android.view.MenuItem
 import butterknife.BindView
+import com.pixis.traktTV.BuildConfig
+import com.pixis.traktTV.R
 import com.pixis.traktTV.adapters.TrackedItemAdapter
 import com.pixis.traktTV.base.BaseActivity
 import com.pixis.traktTV.data.models.TrackedItem
 import com.pixis.traktTV.repository.LocalRepository
 import com.pixis.traktTV.repository.RemoteRepository
 import com.pixis.traktTV.repository.Repository
+import com.pixis.traktTV.screen_login.LoginActivity
 import com.pixis.traktTV.views.AdvancedRecyclerView
 import com.pixis.traktTV.views.Utils
 import com.pixis.trakt_api.Token.TokenDatabase
