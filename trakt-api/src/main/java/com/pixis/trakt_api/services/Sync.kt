@@ -1,6 +1,6 @@
 package com.pixis.trakt_api.services
 
-import com.pixis.trakt_api.network_models.TraktShow
+import com.pixis.trakt_api.models.TraktShow
 import retrofit2.http.GET
 import retrofit2.http.Header
 import rx.Observable

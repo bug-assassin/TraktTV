@@ -3,6 +3,7 @@ package com.pixis.traktTV.injection;
 import com.pixis.traktTV.screen_login.LoginActivity;
 import com.pixis.traktTV.screen_main.MainActivity;
 import com.pixis.traktTV.base.BaseApplication;
+import com.pixis.traktTV.screen_main.presenters.PresenterMainActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -20,4 +21,5 @@ public interface ApplicationComponent {
     void inject(LoginActivity loginActivity);
 
     void inject(@NotNull BaseApplication baseApplication);
+    void inject(PresenterMainActivity presenterMainActivity);
 }

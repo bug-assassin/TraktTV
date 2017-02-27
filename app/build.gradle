@@ -60,6 +60,9 @@ dependencies {
     compile "com.jakewharton.timber:timber:$timber_version"
     compile 'com.squareup.picasso:picasso:2.5.2'
 
+    //Nucleus
+    compile "info.android15.nucleus:nucleus:$nucleus_version"
+
     compile project(':trakt-api')
 }
 repositories {

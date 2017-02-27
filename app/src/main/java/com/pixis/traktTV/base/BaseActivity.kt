@@ -7,11 +7,10 @@ import butterknife.ButterKnife
 import com.pixis.traktTV.injection.ApplicationComponent
 
 
-
 /**
  * Created by Dan on 11/14/2016.
  */
-abstract class BaseActivity : AppCompatActivity(), ActivityFragmentCommon {
+abstract class BaseActivity: AppCompatActivity(), ActivityFragmentCommon {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

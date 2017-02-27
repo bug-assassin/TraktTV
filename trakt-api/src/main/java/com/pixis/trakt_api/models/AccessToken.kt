@@ -1,4 +1,4 @@
-package com.pixis.trakt_api.network_models
+package com.pixis.trakt_api.models
 
 /**
  * Created by Dan on 11/14/2016.

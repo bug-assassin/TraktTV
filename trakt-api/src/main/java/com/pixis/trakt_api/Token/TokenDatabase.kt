@@ -2,7 +2,7 @@ package com.pixis.trakt_api.Token
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.pixis.trakt_api.network_models.AccessToken
+import com.pixis.trakt_api.models.AccessToken
 
 /**
  * Created by Dan on 11/15/2016.

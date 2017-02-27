@@ -6,13 +6,14 @@ import butterknife.BindView
 import com.pixis.traktTV.R
 import com.pixis.traktTV.base.adapters.BaseViewHolder
 import com.pixis.traktTV.data.models.TrackedItem
+import com.pixis.trakt_api.models.CalendarShowEntry
 import com.squareup.picasso.Picasso
 
 /**
  * Created by Dan on 11/9/2016.
  */
 
-class TrackedItemHolder : BaseViewHolder<TrackedItem>() {
+class CalendarShowsViewHolder : BaseViewHolder<CalendarShowEntry>() {
 
     //TV Show Poster
     @BindView(R.id.imgItem) lateinit var imgItem: ImageView
@@ -27,14 +28,14 @@ class TrackedItemHolder : BaseViewHolder<TrackedItem>() {
 
     override val layoutId: Int = R.layout.watchlist_item
 
-    override fun onBind(trackedItem: TrackedItem) {
-        txtTitle.text = trackedItem.title
+    override fun onBind(trackedItem: CalendarShowEntry) {
+        txtTitle.text = trackedItem.show.title
 
         //Episode
         txtSubtitle1.text = trackedItem.episode.number.toString()
         txtSubtitle2.text = trackedItem.episode.title
         txtAdditionalInfo.text = trackedItem.episode.release_date
 
-        Picasso.with(itemView.context).load(trackedItem.poster_path).into(imgItem)
+        //Picasso.with(itemView.context).load(trackedItem.poster_path).into(imgItem)
     }
 }

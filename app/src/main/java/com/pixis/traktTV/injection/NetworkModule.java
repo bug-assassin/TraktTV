@@ -3,6 +3,7 @@ package com.pixis.traktTV.injection;
 import com.pixis.trakt_api.FanArtAPI;
 import com.pixis.trakt_api.image_api.ImageLoading;
 import com.pixis.trakt_api.services.Authentication;
+import com.pixis.trakt_api.services.ServiceCalendars;
 import com.pixis.trakt_api.services.Sync;
 
 import javax.inject.Singleton;
@@ -34,6 +35,12 @@ public class NetworkModule {
     @Provides
     Sync providesSync(Retrofit retrofit) {
         return retrofit.create(Sync.class);
+    }
+
+    @Singleton
+    @Provides
+    ServiceCalendars providesCalendars(Retrofit retrofit) {
+        return retrofit.create(ServiceCalendars.class);
     }
 
     @Singleton
