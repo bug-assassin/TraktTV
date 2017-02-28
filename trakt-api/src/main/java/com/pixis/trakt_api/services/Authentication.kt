@@ -12,11 +12,11 @@ interface Authentication {
 
     @FormUrlEncoded
     @POST("/oauth/token")
-    fun exchangeCodeForAccessToken(@Field("grant_type") grantType : String = "authorization_code",
-                                   @Field("code") code : String,
+    fun exchangeCodeForAccessToken(@Field("code") code : String,
                                    @Field("client_id") clientId : String,
                                    @Field("client_secret") clientSecret : String,
-                                   @Field("redirect_uri") redirectUri : String) : Observable<AccessToken>
+                                   @Field("redirect_uri") redirectUri : String,
+                                   @Field("grant_type") grantType : String = "authorization_code") : Observable<AccessToken>
 
     @FormUrlEncoded
     @POST("/oauth/token")

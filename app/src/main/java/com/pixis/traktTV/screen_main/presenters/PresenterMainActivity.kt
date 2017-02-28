@@ -16,7 +16,7 @@ class PresenterMainActivity : BasePresenter<MainActivity>() {
     lateinit var remoteRepository: RemoteRepository
 
     //TODO move to dagger
-    var localRepository: LocalRepository? = null
+    lateinit var localRepository: LocalRepository
     lateinit var repository: Repository
 
     lateinit var mRealm: Realm
@@ -29,11 +29,11 @@ class PresenterMainActivity : BasePresenter<MainActivity>() {
         mRealm = Realm.getDefaultInstance()
 
         localRepository = LocalRepository(mRealm)
-        repository = Repository(remoteRepository, localRepository!!)
+        repository = Repository(remoteRepository, localRepository)
 
         restartableLatestCache(GET_CALENDAR,
                 {
-                    repository.getShowsNextDays(3)
+                    repository.getWatchList()
                 },
                 MainActivity::setData,
                 { view, error ->

@@ -17,6 +17,7 @@ class TokenDatabase(val context: Context) : TokenStorage {
         private val TOKEN_TYPE_KEY: String = "TOKEN_TYPE_KEY"
         private val EXPIRES_IN_KEY: String = "EXPIRES_IN_KEY"
         private val REFRESH_TOKEN_KEY: String = "REFRESH_TOKEN_KEY"
+        private val CREATED_AT: String = "CREATED_AT"
         private val SCOPE_KEY: String = "SCOPE_KEY"
     }
 
@@ -34,6 +35,7 @@ class TokenDatabase(val context: Context) : TokenStorage {
                 prefs.getString(TOKEN_TYPE_KEY, ""),
                 prefs.getString(EXPIRES_IN_KEY, "0").toInt(),
                 prefs.getString(REFRESH_TOKEN_KEY, ""),
+                prefs.getString(CREATED_AT, ""),
                 prefs.getString(SCOPE_KEY, "")
         )
     }
@@ -44,6 +46,7 @@ class TokenDatabase(val context: Context) : TokenStorage {
         editor.putString(TOKEN_TYPE_KEY, accessToken.token_type)
         editor.putString(EXPIRES_IN_KEY, accessToken.expires_in.toString())
         editor.putString(REFRESH_TOKEN_KEY, accessToken.refresh_token)
+        editor.putString(CREATED_AT, accessToken.created_at)
         editor.putString(SCOPE_KEY, accessToken.scope)
         editor.putBoolean("AUTHENTICATED", true)
         editor.apply()

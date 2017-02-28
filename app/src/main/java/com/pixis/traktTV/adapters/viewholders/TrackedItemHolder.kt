@@ -26,10 +26,10 @@ class TrackedItemHolder : BaseViewHolder<TrackedItem>() {
     override fun onBind(item: TrackedItem) {
         txtTitle.text = item.title
 
-        //Episode
-        txtSubtitle1.text = item.episode.number.toString()
+        //Episode TODO
+        /*txtSubtitle1.text = item.episode.number.toString()
         txtSubtitle2.text = item.episode.title
-        txtAdditionalInfo.text = item.episode.release_date
+        txtAdditionalInfo.text = item.episode.release_date*/
 
         Picasso.with(itemView.context).load(item.poster_path).into(imgItem)
     }

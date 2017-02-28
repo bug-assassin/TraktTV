@@ -62,7 +62,7 @@ class AuthDialog(val listener: AuthDialogResultListener) : DialogFragment() {
         ButterKnife.bind(this, view)
 
         val url = String.format("https://trakt.tv/oauth/authorize?response_type=code&client_id=%s&redirect_uri=%s", client_id, redirect_url)
-        webview.getSettings().setJavaScriptEnabled(true)
+        webview.settings.javaScriptEnabled = true
         webview.loadUrl(url)
         webview.setWebViewClient(object : WebViewClient() {
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {

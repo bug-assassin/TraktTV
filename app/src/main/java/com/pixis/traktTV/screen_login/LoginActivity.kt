@@ -8,13 +8,12 @@ import butterknife.BindString
 import butterknife.OnClick
 import com.pixis.traktTV.R
 import com.pixis.traktTV.base.BaseActivity
-import com.pixis.traktTV.screen_main.MainActivity
 import com.pixis.traktTV.screen_login.views.AuthDialog
 import com.pixis.traktTV.screen_login.views.AuthDialogResultListener
+import com.pixis.traktTV.screen_main.MainActivity
 import com.pixis.trakt_api.Token.TokenDatabase
 import com.pixis.trakt_api.services.Authentication
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
+import com.pixis.trakt_api.utils.applySchedulers
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -45,8 +44,8 @@ class LoginActivity : BaseActivity() {
     fun login() {
         AuthDialog.newInstance(object : AuthDialogResultListener {
             override fun onAuthDialogFinished(resultCode: Int, bundle: Bundle?) {
-                if (resultCode == Activity.RESULT_OK) {
-                    authenticate(bundle!!.getString("CODE"))
+                if (resultCode == Activity.RESULT_OK && bundle != null) {
+                    authenticate(bundle.getString("CODE"))
                 } else {
                     Toast.makeText(getContext(), "An error has occurred", Toast.LENGTH_SHORT)
                 }
@@ -59,8 +58,7 @@ class LoginActivity : BaseActivity() {
                 clientId = client_id,
                 clientSecret = client_secret,
                 redirectUri = redirect_url)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .applySchedulers()
                 .first()
                 .filter { it != null }
                 .subscribe {

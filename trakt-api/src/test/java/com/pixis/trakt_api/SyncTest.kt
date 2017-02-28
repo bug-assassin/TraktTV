@@ -22,6 +22,7 @@ class SyncTest : BaseTest() {
     @Test
     fun TestSync() {
         val watchList = sync.getWatchListShows()
+                .doOnError { error(it) }
                 .toBlocking()
                 .first()
 
