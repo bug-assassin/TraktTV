@@ -14,9 +14,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 
-/**
- * Created by Dan on 11/9/2016.
- */
 @Module
 public class NetworkModule {
     final String fanArtApiKey;

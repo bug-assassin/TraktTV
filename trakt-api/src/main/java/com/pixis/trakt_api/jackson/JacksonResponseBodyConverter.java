@@ -7,10 +7,6 @@ import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
 
-/**
- * Created by Dan on 11/18/2016.
- */
-
 final class JacksonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
     private final ObjectReader adapter;
 

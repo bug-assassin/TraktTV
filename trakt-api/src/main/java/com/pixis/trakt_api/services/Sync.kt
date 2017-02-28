@@ -5,9 +5,6 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import rx.Observable
 
-/**
- * Created by Dan on 11/14/2016.
- */
 //TODO use http://www.jsonschema2pojo.org/
 /**
  * <b>OAuth Required</b>

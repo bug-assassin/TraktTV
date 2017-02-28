@@ -2,9 +2,6 @@ package com.pixis.trakt_api.Token
 
 import com.pixis.trakt_api.models.AccessToken
 
-/**
- * Created by Dan on 11/16/2016.
- */
 class MockTokenDatabase(val mAccessToken : String) : TokenStorage {
 
     override fun isAuthenticated(): Boolean {

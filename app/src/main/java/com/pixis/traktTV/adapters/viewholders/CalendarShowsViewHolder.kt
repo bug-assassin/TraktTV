@@ -5,13 +5,7 @@ import android.widget.TextView
 import butterknife.BindView
 import com.pixis.traktTV.R
 import com.pixis.traktTV.base.adapters.BaseViewHolder
-import com.pixis.traktTV.data.models.TrackedItem
 import com.pixis.trakt_api.models.CalendarShowEntry
-import com.squareup.picasso.Picasso
-
-/**
- * Created by Dan on 11/9/2016.
- */
 
 class CalendarShowsViewHolder : BaseViewHolder<CalendarShowEntry>() {
 
@@ -28,13 +22,13 @@ class CalendarShowsViewHolder : BaseViewHolder<CalendarShowEntry>() {
 
     override val layoutId: Int = R.layout.watchlist_item
 
-    override fun onBind(trackedItem: CalendarShowEntry) {
-        txtTitle.text = trackedItem.show.title
+    override fun onBind(item: CalendarShowEntry) {
+        txtTitle.text = item.show.title
 
         //Episode
-        txtSubtitle1.text = trackedItem.episode.number.toString()
-        txtSubtitle2.text = trackedItem.episode.title
-        txtAdditionalInfo.text = trackedItem.episode.release_date
+        txtSubtitle1.text = item.episode.number.toString()
+        txtSubtitle2.text = item.episode.title
+        txtAdditionalInfo.text = item.episode.release_date
 
         //Picasso.with(itemView.context).load(trackedItem.poster_path).into(imgItem)
     }

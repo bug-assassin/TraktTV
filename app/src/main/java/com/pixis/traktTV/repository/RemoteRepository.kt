@@ -14,9 +14,6 @@ import com.pixis.trakt_api.utils.toRetrofitDate
 import rx.Observable
 import java.util.*
 
-/**
- * Created by Dan on 11/20/2016.
- */
 class RemoteRepository(private val syncService: Sync, private val serviceCalendars: ServiceCalendars, private val imageLoadingAPI: ImageLoading) {
     fun getWatchList() : Observable<List<TrackedItem>> {
         return syncService.getWatchListShows()

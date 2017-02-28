@@ -7,9 +7,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.junit.Before
 import org.junit.Test
 
-/**
- * Created by Dan on 11/16/2016.
- */
 class FanArtImagesTest {
     val api_key = "c9a9bbee5c1550e6556dbf36d6d25dbd"
 

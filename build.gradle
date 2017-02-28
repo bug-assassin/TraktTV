@@ -3,8 +3,8 @@ project.ext.sdkVersion = 25
 project.ext.buildToolsVersion = '25.0.0'
 
 buildscript {
-    ext.kotlin_version = '1.0.5'
     ext {
+        kotlin_version = '1.0.6'
         support_library_version = '25.0.1'
         butterknife_version = '8.4.0'
         dagger_version = '2.7'

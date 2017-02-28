@@ -6,9 +6,6 @@ import com.pixis.trakt_api.utils.applySchedulers
 import io.realm.RealmModel
 import rx.Observable
 
-/**
- * Created by Dan on 11/20/2016.
- */
 //Inspired by https://github.com/FabianTerhorst/ApiClient/blob/master/apiclient/src/main/java/io/fabianterhorst/apiclient/ApiObserver.java
 class Repository(val remoteRepo: RemoteRepository, val localRepo: LocalRepository) {
     fun getWatchList(): Observable<List<TrackedItem>> {

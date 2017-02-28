@@ -8,10 +8,6 @@ import com.pixis.traktTV.base.adapters.BaseViewHolder
 import com.pixis.traktTV.base.adapters.BindableViewHolder
 import java.util.*
 
-/**
- * Created by Dan on 11/9/2016.
- */
-
 interface OnItemClickListener<T> {
     fun onTrackedItemClicked(item: T, viewHolder: BindableViewHolder<T>, position: Int)
     fun onTrackedItemLongClick(item: T, viewHolder: BindableViewHolder<T>, position: Int)

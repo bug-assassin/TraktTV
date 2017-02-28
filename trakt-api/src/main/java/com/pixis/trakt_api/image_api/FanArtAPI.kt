@@ -6,9 +6,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 
-/**
- * Created by Dan on 11/11/2016.
- */
 class FanArtAPI(val fanArtApiKey : String) {
 
     val baseUrl : String = "http://webservice.fanart.tv/v3/"

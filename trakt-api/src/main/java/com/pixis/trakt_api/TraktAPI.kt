@@ -6,9 +6,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
-/**
- * Created by Dan on 11/11/2016.
- */
 class TraktAPI(val tokenStorage: TokenStorage) {
 
     fun createOkHttpClient(client_id: String, loggingLevel : HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.NONE): OkHttpClient.Builder {

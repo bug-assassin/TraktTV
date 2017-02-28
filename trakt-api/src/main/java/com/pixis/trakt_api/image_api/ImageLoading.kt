@@ -5,9 +5,6 @@ import retrofit2.http.Path
 import rx.Observable
 import java.util.*
 
-/**
- * Created by Dan on 11/16/2016.
- */
 interface ImageLoading {
     //TODO
     @GET("{media}/{id}")

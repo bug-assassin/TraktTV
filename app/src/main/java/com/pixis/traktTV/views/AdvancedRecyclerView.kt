@@ -13,10 +13,6 @@ import android.widget.LinearLayout
 
 import com.pixis.traktTV.R
 
-/**
- * Created by Dan on 11/9/2016.
- */
-
 open class AdvancedRecyclerView : LinearLayout {
 
     private lateinit var recyclerView: RecyclerView

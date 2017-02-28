@@ -7,6 +7,7 @@ import com.pixis.trakt_api.Token.MockTokenDatabase
 import com.pixis.trakt_api.Token.TokenStorage
 import com.pixis.trakt_api.TraktAPI
 import com.pixis.trakt_api.image_api.ImageLoading
+import com.pixis.trakt_api.services.ServiceCalendars
 import com.pixis.trakt_api.services.Sync
 import junit.framework.TestCase
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,9 +15,6 @@ import org.junit.Before
 import org.junit.Test
 import retrofit2.Retrofit
 
-/**
- * Created by Dan on 11/21/2016.
- */
 class RemoteRepositoryTest {
 
     lateinit var remoteRepo: RemoteRepository
@@ -35,8 +33,6 @@ class RemoteRepositoryTest {
 
     val baseURL = "https://api.trakt.tv"
     val client_id = "fdacbaf7fe41bc6d5bf179a4a2f3d261a5ff5d8ae2e9fcc9eef48b37bb043c20"
-    val client_secret = "8828873a1cbb07126bf76c305ea13d0f9237092896241196f7300b799ae9d787"
-    val redirect_url = "urn:ietf:wg:oauth:2.0:oob"
 
     open val loggingLevel = HttpLoggingInterceptor.Level.BODY
 
@@ -55,12 +51,12 @@ class RemoteRepositoryTest {
         initSync()
         initImageLoading()
 
-        remoteRepo = RemoteRepository(retrofit.create(Sync::class.java), imageLoadingAPI)
+        remoteRepo = RemoteRepository(retrofit.create(Sync::class.java), retrofit.create(ServiceCalendars::class.java), imageLoadingAPI)
     }
 
     @Test
     @Throws(Exception::class)
-    fun addition_isCorrect() {
+    fun VerifyWatchListExists() {
         remoteRepo.getWatchList().subscribe({
             TestCase.assertTrue(it.size > 0)
         }

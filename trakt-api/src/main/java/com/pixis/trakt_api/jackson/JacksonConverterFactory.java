@@ -14,10 +14,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 
-/**
- * Created by Dan on 11/18/2016.
- */
-
 public final class JacksonConverterFactory extends Converter.Factory {
     /** Create an instance using a default {@link ObjectMapper} instance for conversion. */
     public static JacksonConverterFactory create() {

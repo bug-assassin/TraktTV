@@ -3,9 +3,6 @@ package com.pixis.traktTV.data.models
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
-/**
- * Created by Dan on 11/14/2016.
- */
 open class TrackedItem(
         @PrimaryKey
         open var traktId: String = "",

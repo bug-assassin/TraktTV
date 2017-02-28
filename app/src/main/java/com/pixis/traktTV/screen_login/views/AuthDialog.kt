@@ -19,9 +19,6 @@ import com.pixis.traktTV.views.hide
 import com.pixis.traktTV.views.show
 import timber.log.Timber
 
-/**
- * Created by Dan on 11/11/2016.
- */
 interface AuthDialogResultListener {
     fun onAuthDialogFinished(resultCode : Int, bundle: Bundle?)
 }

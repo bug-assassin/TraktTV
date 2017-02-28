@@ -19,10 +19,6 @@ import rx.functions.Action1;
 import rx.plugins.RxJavaHooks;
 import timber.log.Timber;
 
-/**
- * Created by Dan on 11/9/2016.
- */
-
 public class BaseApplication extends Application {
     private ApplicationComponent daggerApplicationComponent;
 

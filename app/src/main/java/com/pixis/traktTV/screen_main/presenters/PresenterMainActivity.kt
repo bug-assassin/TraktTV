@@ -11,9 +11,6 @@ import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
 
-/**
- * Created by Dan on 11/26/2016.
- */
 class PresenterMainActivity : BasePresenter<MainActivity>() {
     @Inject
     lateinit var remoteRepository: RemoteRepository
@@ -22,13 +19,14 @@ class PresenterMainActivity : BasePresenter<MainActivity>() {
     var localRepository: LocalRepository? = null
     lateinit var repository: Repository
 
-    @Inject
     lateinit var mRealm: Realm
 
     val GET_CALENDAR = 0
 
     override fun onCreate(savedState: Bundle?) {
         super.onCreate(savedState)
+
+        mRealm = Realm.getDefaultInstance()
 
         localRepository = LocalRepository(mRealm)
         repository = Repository(remoteRepository, localRepository!!)

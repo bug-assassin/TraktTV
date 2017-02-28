@@ -8,9 +8,6 @@ import rx.Observable
 
 
 
-/**
- * Created by Dan on 11/14/2016.
- */
 interface Authentication {
 
     @FormUrlEncoded

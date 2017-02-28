@@ -5,9 +5,6 @@ import android.util.AttributeSet
 import com.pixis.traktTV.views.AdvancedRecyclerView
 import javax.inject.Inject
 
-/**
- * Created by Dan on 11/23/2016.
- */
 class TrackedItemRecyclerView: AdvancedRecyclerView {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)

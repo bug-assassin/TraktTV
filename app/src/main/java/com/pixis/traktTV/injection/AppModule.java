@@ -18,9 +18,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import timber.log.Timber;
 
-/**
- * Created by Dan on 11/11/2016.
- */
 @Module
 public class AppModule {
 

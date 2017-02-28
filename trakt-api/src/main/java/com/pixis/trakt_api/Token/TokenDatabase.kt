@@ -4,9 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.pixis.trakt_api.models.AccessToken
 
-/**
- * Created by Dan on 11/15/2016.
- */
 class TokenDatabase(val context: Context) : TokenStorage {
 
     val prefs : SharedPreferences
