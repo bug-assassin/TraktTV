@@ -8,7 +8,7 @@ Uses:
 - RxJava
 - Realm
 - Retrofit2
-
+- Dagger2
 
 
 <img src="screenshots/main_screen.png" width="49%" />
