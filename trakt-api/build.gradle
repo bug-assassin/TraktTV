@@ -40,8 +40,8 @@ dependencies {
     })
     testCompile "junit:junit:4.12"
 
-    compile "io.reactivex:rxjava:$rxjava_version"
-    compile "io.reactivex:rxandroid:$rxandroid_version"
+    compile "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    compile "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
 
     compile "com.squareup.retrofit2:retrofit:$retrofit_version"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
