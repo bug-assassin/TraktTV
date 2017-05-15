@@ -13,10 +13,9 @@ import com.pixis.trakt_api.realmmodule.TraktRealmLibraryModule;
 
 import javax.inject.Inject;
 
+import io.reactivex.plugins.RxJavaPlugins;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
-import rx.functions.Action1;
-import rx.plugins.RxJavaHooks;
 import timber.log.Timber;
 
 public class BaseApplication extends Application {
@@ -55,12 +54,7 @@ public class BaseApplication extends Application {
         Realm.setDefaultConfiguration(config);
 
         //RxJava Error Logging
-        RxJavaHooks.setOnError(new Action1<Throwable>() {
-            @Override
-            public void call(Throwable throwable) {
-                Timber.e(throwable);
-            }
-        });
+        //TODO
     }
 
     public ApplicationComponent getComponent() {
