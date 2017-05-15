@@ -1,4 +1,4 @@
-#TraktTV
+# TraktTV
 [![Build Status](https://travis-ci.org/DanSirbu/TraktTV.svg?branch=master)](https://travis-ci.org/DanSirbu/TraktTV)
 
 Android app that notifies you when the next episode of your trakt watchlist airs.
