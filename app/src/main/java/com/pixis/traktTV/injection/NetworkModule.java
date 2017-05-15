@@ -11,7 +11,6 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 
 @Module
@@ -44,7 +43,7 @@ public class NetworkModule {
     @Provides
     ImageLoading providesImageLoadingAPI() {
         FanArtAPI fanArtApi = new FanArtAPI(fanArtApiKey);
-        OkHttpClient okHttp = fanArtApi.createOkHttpClient(HttpLoggingInterceptor.Level.NONE).build();
+        OkHttpClient okHttp = fanArtApi.createOkHttpClient().build();
         Retrofit imageRetrofit = fanArtApi.createRetrofit(okHttp).build();
 
         return imageRetrofit.create(ImageLoading.class);

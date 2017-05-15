@@ -3,17 +3,13 @@ package com.pixis.trakt_api
 import com.pixis.trakt_api.Token.TokenStorage
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 class TraktAPI(val tokenStorage: TokenStorage) {
 
-    fun createOkHttpClient(client_id: String, loggingLevel : HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.NONE): OkHttpClient.Builder {
-        val logging = HttpLoggingInterceptor()
-        logging.level = loggingLevel
-
+    fun createOkHttpClient(client_id: String): OkHttpClient.Builder {
         val okHttpClient = OkHttpClient.Builder()
         okHttpClient.addInterceptor { chain ->
             val original = chain.request()
@@ -24,7 +20,7 @@ class TraktAPI(val tokenStorage: TokenStorage) {
                     .addHeader("trakt-api-version", "2")
                     .build()
             return@addInterceptor chain.proceed(newRequest)
-        }.addInterceptor(logging)
+        }
 
         okHttpClient.addInterceptor { chain ->
             var newRequest = chain.request()

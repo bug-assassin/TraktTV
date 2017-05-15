@@ -15,10 +15,13 @@ open class BaseTest {
     lateinit var retrofit : Retrofit
 
     open fun init() {
-        val tokenStorage : TokenStorage = MockTokenDatabase(BuildConfig.MOCK_AUTHENTICATION_TOKEN)
+        val loggingIntercepter = HttpLoggingInterceptor()
+        loggingIntercepter.level = loggingLevel
+
+        val tokenStorage : TokenStorage = MockTokenDatabase("1")//BuildConfig.MOCK_AUTHENTICATION_TOKEN)
 
         val networkService = TraktAPI(tokenStorage = tokenStorage)
-        val okHttpClient = networkService.createOkHttpClient(client_id, loggingLevel).build()
+        val okHttpClient = networkService.createOkHttpClient(client_id).addInterceptor(loggingIntercepter).build()
         retrofit = networkService.createRetrofit(okHttpClient, baseURL).build()
     }
 

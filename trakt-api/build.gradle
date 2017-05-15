@@ -34,11 +34,8 @@ android {
     }
 }
 dependencies {
-    //compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
     testCompile "junit:junit:4.12"
+    testCompile "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
     compile "io.reactivex.rxjava2:rxjava:$rxjava_version"
     compile "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
@@ -50,9 +47,5 @@ dependencies {
     compile "com.squareup.retrofit2:adapter-rxjava:$retrofit_version"
 
     compile "com.squareup.okhttp3:okhttp:$okhttp_version"
-    compile "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
     compile "com.jakewharton.timber:timber:$timber_version"
-}
-repositories {
-    mavenCentral()
 }
