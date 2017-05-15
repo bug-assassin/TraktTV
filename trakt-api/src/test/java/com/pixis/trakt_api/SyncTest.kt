@@ -25,7 +25,6 @@ class SyncTest : BaseTest() {
                 .doOnError { error(it) }
                 .toBlocking()
                 .first()
-
-        assert(watchList.size > 0)
+        assert(watchList.isNotEmpty())
     }
 }

@@ -1,11 +1,12 @@
 package com.pixis.trakt_api.utils
 
-import rx.Observable
-import rx.android.schedulers.AndroidSchedulers
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import rx.functions.Func2
 
 fun <T> Observable<T>.applySchedulers(): Observable<T> {
-    return this.subscribeOn(rx.schedulers.Schedulers.io())
+    return this.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 }
 

@@ -1,10 +1,10 @@
 package com.pixis.trakt_api
 
-import com.pixis.trakt_api.jackson.JacksonConverterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 class FanArtAPI(val fanArtApiKey : String) {
 
@@ -34,7 +34,7 @@ class FanArtAPI(val fanArtApiKey : String) {
                 .baseUrl(baseUrl)
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(JacksonConverterFactory.create())
+                .addConverterFactory(MoshiConverterFactory.create())
     }
 
 }
