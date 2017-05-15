@@ -39,6 +39,7 @@ android {
 
 dependencies {
     testCompile "junit:junit:4.12"
+    testCompile "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
     //Support Library
     compile "com.android.support:appcompat-v7:$support_library_version"

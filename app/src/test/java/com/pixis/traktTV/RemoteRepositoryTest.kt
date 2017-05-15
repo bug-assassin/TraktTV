@@ -25,7 +25,11 @@ class RemoteRepositoryTest {
 
     fun initImageLoading() {
         val fanArtApi = FanArtAPI(api_key)
-        val okHttp = fanArtApi.createOkHttpClient(HttpLoggingInterceptor.Level.NONE).build()
+
+        val loggingIntercepter = HttpLoggingInterceptor()
+        loggingIntercepter.level = HttpLoggingInterceptor.Level.BODY
+
+        val okHttp = fanArtApi.createOkHttpClient().addInterceptor(loggingIntercepter).build()
         val imageRetrofit = fanArtApi.createRetrofit(okHttp).build()
 
         imageLoadingAPI = imageRetrofit.create(ImageLoading::class.java)
@@ -39,10 +43,14 @@ class RemoteRepositoryTest {
     lateinit var retrofit : Retrofit
 
     fun initSync() {
+        val loggingIntercepter = HttpLoggingInterceptor()
+        loggingIntercepter.level = HttpLoggingInterceptor.Level.BODY
+
         val tokenStorage : TokenStorage = MockTokenDatabase(BuildConfig.MOCK_AUTHENTICATION_TOKEN)
 
         val networkService = TraktAPI(tokenStorage = tokenStorage)
-        val okHttpClient = networkService.createOkHttpClient(client_id, loggingLevel).build()
+
+        val okHttpClient = networkService.createOkHttpClient(client_id).addInterceptor(loggingIntercepter).build()
         retrofit = networkService.createRetrofit(okHttpClient, baseURL).build()
     }
 

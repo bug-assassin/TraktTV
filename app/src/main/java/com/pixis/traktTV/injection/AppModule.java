@@ -14,7 +14,6 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import timber.log.Timber;
 
@@ -60,7 +59,7 @@ public class AppModule {
     @Singleton
     @Provides
     OkHttpClient providesOkHttp(TraktAPI traktAPI) {
-        return traktAPI.createOkHttpClient(client_id, HttpLoggingInterceptor.Level.NONE)
+        return traktAPI.createOkHttpClient(client_id)
                 //.addInterceptor(new AuthenticationInterceptor())
                 .build();
     }

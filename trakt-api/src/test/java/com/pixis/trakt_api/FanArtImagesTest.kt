@@ -14,8 +14,12 @@ class FanArtImagesTest {
 
     @Before
     fun init() {
+        val loggingIntercepter = HttpLoggingInterceptor()
+        loggingIntercepter.level = HttpLoggingInterceptor.Level.BODY
+
         val fanArtApi = FanArtAPI(api_key)
-        val okHttp = fanArtApi.createOkHttpClient(HttpLoggingInterceptor.Level.NONE).build()
+
+        val okHttp = fanArtApi.createOkHttpClient().addInterceptor(loggingIntercepter).build()
         val imageRetrofit = fanArtApi.createRetrofit(okHttp).build()
 
         imageLoadingAPI = imageRetrofit.create(ImageLoading::class.java)
