@@ -10,15 +10,14 @@ import com.pixis.trakt_api.services.ServiceCalendars
 import com.pixis.trakt_api.services.Sync
 import com.pixis.trakt_api.utils.asPair
 import com.pixis.trakt_api.utils.toRetrofitDate
-import rx.Observable
-import java.util.*
+import io.reactivex.Observable
+import io.reactivex.Single
+import java.util.Date
 
 class RemoteRepository(private val syncService: Sync, private val serviceCalendars: ServiceCalendars, private val imageLoadingAPI: ImageLoading) {
-    fun getWatchList() : Observable<List<TrackedItem>> {
+    fun getWatchList() : Single<List<TrackedItem>> {
         return syncService.getWatchListShows()
-                .flatMap {
-                    Observable.from(it)
-                }
+                .flatMap { Observable.fromIterable(it) }
                 .flatMap {
                     val show = Observable.just(it)
                     val showImage = imageLoadingAPI.getImages(FanArtMedia.SHOW, it.show.ids.tvdb)

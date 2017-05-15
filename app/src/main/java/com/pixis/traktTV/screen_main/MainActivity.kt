@@ -18,7 +18,7 @@ import com.pixis.traktTV.screen_login.LoginActivity
 import com.pixis.traktTV.screen_main.presenters.PresenterMainActivity
 import com.pixis.traktTV.views.AdvancedRecyclerView
 import com.pixis.trakt_api.Token.TokenDatabase
-import nucleus.factory.RequiresPresenter
+import nucleus5.factory.RequiresPresenter
 import timber.log.Timber
 import javax.inject.Inject
 

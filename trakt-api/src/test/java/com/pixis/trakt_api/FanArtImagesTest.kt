@@ -38,8 +38,7 @@ class FanArtImagesTest {
 
         val loadedImages = imageLoadingAPI
                                 .getImages(FanArtMedia.SHOW, showId.toString())
-                                .toBlocking()
-                                .first()
+                                .blockingFirst()
 
         assert(loadedImages.thetvdb_id == showId)
         assert(loadedImages.name == showName)

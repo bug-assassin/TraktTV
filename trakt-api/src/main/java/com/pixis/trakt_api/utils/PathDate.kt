@@ -2,7 +2,7 @@ package com.pixis.trakt_api.utils
 
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
 class PathDate(val date: Date) {
     companion object {

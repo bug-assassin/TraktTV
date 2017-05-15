@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.pixis.traktTV.base.adapters.BaseViewHolder
 import com.pixis.traktTV.base.adapters.BindableViewHolder
-import java.util.*
 
 interface OnItemClickListener<T> {
     fun onTrackedItemClicked(item: T, viewHolder: BindableViewHolder<T>, position: Int)

@@ -59,7 +59,6 @@ class LoginActivity : BaseActivity() {
                 clientSecret = client_secret,
                 redirectUri = redirect_url)
                 .applySchedulers()
-                .first()
                 .filter { it != null }
                 .subscribe {
                     tokenDatabase.saveToken(it)

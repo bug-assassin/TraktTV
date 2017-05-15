@@ -1,9 +1,8 @@
 package com.pixis.trakt_api.image_api
 
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
-import rx.Observable
-import java.util.*
 
 interface ImageLoading {
     //TODO

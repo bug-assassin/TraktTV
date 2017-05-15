@@ -1,9 +1,9 @@
 package com.pixis.trakt_api.services
 
 import com.pixis.trakt_api.models.CalendarShowEntry
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
-import rx.Observable
 
 /**
  * Created from https://github.com/UweTrottmann/trakt-java/blob/master/src/main/java/com/uwetrottmann/trakt5/services/ServiceCalendars.java

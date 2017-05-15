@@ -1,11 +1,11 @@
 package com.pixis.traktTV.base
 
 import android.os.Bundle
-import nucleus.factory.PresenterFactory
-import nucleus.factory.ReflectionPresenterFactory
-import nucleus.presenter.Presenter
-import nucleus.view.PresenterLifecycleDelegate
-import nucleus.view.ViewWithPresenter
+import nucleus5.factory.PresenterFactory
+import nucleus5.factory.ReflectionPresenterFactory
+import nucleus5.presenter.Presenter
+import nucleus5.view.PresenterLifecycleDelegate
+import nucleus5.view.ViewWithPresenter
 
 /**
  * From NucleusAppCompatActivity

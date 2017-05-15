@@ -23,8 +23,8 @@ class SyncTest : BaseTest() {
     fun TestSync() {
         val watchList = sync.getWatchListShows()
                 .doOnError { error(it) }
-                .toBlocking()
-                .first()
+                .blockingFirst()
+
         assert(watchList.isNotEmpty())
     }
 }

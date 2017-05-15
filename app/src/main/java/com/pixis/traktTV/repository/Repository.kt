@@ -2,9 +2,12 @@ package com.pixis.traktTV.repository
 
 import com.pixis.traktTV.data.models.TrackedItem
 import com.pixis.trakt_api.models.CalendarShowEntry
-import com.pixis.trakt_api.utils.applySchedulers
+import io.reactivex.Observable
 import io.realm.RealmModel
-import rx.Observable
+import com.pixis.traktTV.views.Utils.showError
+import com.pixis.trakt_api.utils.applySchedulers
+import io.reactivex.Single
+import io.reactivex.internal.functions.Functions
 
 //Inspired by https://github.com/FabianTerhorst/ApiClient/blob/master/apiclient/src/main/java/io/fabianterhorst/apiclient/ApiObserver.java
 class Repository(val remoteRepo: RemoteRepository, val localRepo: LocalRepository) {
@@ -12,13 +15,13 @@ class Repository(val remoteRepo: RemoteRepository, val localRepo: LocalRepositor
         return getRemoteDataAndSaveIt(remoteRepo.getWatchList(), TrackedItem::class.java)
     }
 
-    private fun <T : RealmModel> getRemoteDataAndSaveIt(remoteOperation: Observable<List<T>>, realmClass: Class<T>): Observable<List<T>> {
+    private fun <T : RealmModel> getRemoteDataAndSaveIt(remoteOperation: Single<List<T>>, realmClass: Class<T>): Observable<List<T>> {
         val localQuery: Observable<List<T>> = localRepo.getItems(realmClass)
                 .filter { it.isLoaded }
                 .switchMap { Observable.just(it) } //Not interested in old emission
 
         //Remote Query is just a side effect
-        val remoteQuery = remoteOperation.applySchedulers().doOnNext { localRepo.saveData(it) }
+        val remoteQuery = remoteOperation.applySchedulers().doAfterSuccess { localRepo.saveData(it) }
 
         //Do the remote query only
         /*if (forceUpdate) {
@@ -26,8 +29,8 @@ class Repository(val remoteRepo: RemoteRepository, val localRepo: LocalRepositor
         } else { //Allow cached data*/
         return Observable.defer {
             Observable.create<List<T>>({ subscriber ->
-                localQuery.subscribe(subscriber)
-                remoteQuery.subscribe({}, { subscriber.onError(it) }, {})
+                localQuery.subscribe({subscriber.onNext(it)}, {subscriber.onError(it)})
+                remoteQuery.subscribe({}, { subscriber.onError(it) })
             })
         }
         //}

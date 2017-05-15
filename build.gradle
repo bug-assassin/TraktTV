@@ -15,7 +15,7 @@ buildscript {
         okhttp_version = '3.8.0'
         timber_version = '4.5.1'
         realm_version = '3.1.4'
-        nucleus_version = '4.0.0'
+        nucleus_version = '5.0.0-beta1'
     }
 
     repositories {

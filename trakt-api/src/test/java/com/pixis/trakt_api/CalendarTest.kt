@@ -4,7 +4,7 @@ import com.pixis.trakt_api.services.ServiceCalendars
 import com.pixis.trakt_api.utils.toRetrofitDate
 import org.junit.Before
 import org.junit.Test
-import java.util.*
+import java.util.Date
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -25,8 +25,7 @@ class CalendarTest : BaseTest() {
     fun TestSync() {
         val startTime = 1480946120298L //5/12/2016 8:55 am
         val watchList = serviceCalendars.getMyShows(Date(startTime).toRetrofitDate().toString(), 3)
-                .toBlocking()
-                .first()
+                .blockingFirst()
 
         assert(watchList.size == 2)
     }
