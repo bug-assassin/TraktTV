@@ -1,5 +1,5 @@
 package com.pixis.traktTV.injection;
-
+/*
 import com.pixis.trakt_api.FanArtAPI;
 import com.pixis.trakt_api.services_fanart.ImageService;
 import com.pixis.trakt_api.services_trakt.Authentication;
@@ -48,3 +48,4 @@ public class NetworkModule {
         return imageRetrofit.create(ImageService.class);
     }
 }
+*/

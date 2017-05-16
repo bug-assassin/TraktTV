@@ -1,96 +1,70 @@
 package com.pixis.traktTV.screen_main
 
-import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
-import android.support.v4.widget.SwipeRefreshLayout
-import android.view.Menu
+import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.view.ViewPager
+import android.support.v4.widget.DrawerLayout
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
+import android.view.Gravity
 import android.view.MenuItem
-import butterknife.BindView
-import com.pixis.traktTV.BuildConfig
 import com.pixis.traktTV.R
-import com.pixis.traktTV.adapters.SingleItemAdapter
-import com.pixis.traktTV.base.BaseRxActivity
-import com.pixis.traktTV.data.models.TrackedItem
-import com.pixis.traktTV.screen_login.LoginActivity
-import com.pixis.traktTV.screen_main.presenters.PresenterMainActivity
-import com.pixis.traktTV.views.AdvancedRecyclerView
-import com.pixis.trakt_api.utils.Token.TokenDatabase
-import nucleus5.factory.RequiresPresenter
-import timber.log.Timber
-import javax.inject.Inject
 
+class MainActivity: AppCompatActivity() {
 
-//List of tracked movies and tv shows
-@RequiresPresenter(PresenterMainActivity::class)
-class MainActivity : BaseRxActivity<PresenterMainActivity>() {
+    lateinit var drawerLayout: DrawerLayout
+    lateinit var viewPager: ViewPager
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-    override val layoutId: Int = R.layout.activity_main
+        drawerLayout = findViewById(R.id.drawer_layout) as DrawerLayout
 
-    @BindView(R.id.recyclerView)
-    lateinit var recyclerView: AdvancedRecyclerView
-    @BindView(R.id.fabMainAction)
-    lateinit var fabMainAction: FloatingActionButton
-    lateinit var trackedItemAdapter: SingleItemAdapter<TrackedItem>
+        setSupportActionBar(findViewById(R.id.toolbar) as Toolbar)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-    @Inject
-    lateinit var tokenDatabase: TokenDatabase
+        val navigationView = findViewById(R.id.nav_view) as NavigationView
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            menuItem.isChecked = true
+            onOptionsItemSelected(menuItem)
+            drawerLayout.closeDrawers()
+            true
+         }
 
+        viewPager = findViewById(R.id.viewpager) as ViewPager
+        viewPager.adapter = object : FragmentPagerAdapter(supportFragmentManager) {
+            val fragments = listOf(MoviesFragment(), MoviesFragment(), MoviesFragment())
+            val titles = listOf("Trending Movies", "Trending Shows", "Watchlist")
 
-    override fun injectPresenter(presenter: PresenterMainActivity) {
-        getComponent().inject(presenter)
-    }
+            override fun getItem(position: Int): Fragment {
+                return fragments[position]
+            }
 
-    override fun init(savedInstanceState: Bundle?) {
-        getComponent().inject(this)
+            override fun getCount(): Int {
+                return fragments.size
+            }
 
-        if (!tokenDatabase.isAuthenticated()) {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-            return
+            override fun getPageTitle(position: Int): CharSequence {
+                return titles[position]
+            }
         }
 
-        trackedItemAdapter = SingleItemAdapter(this, TrackedItemHolder())
-        recyclerView.setAdapter(trackedItemAdapter)
-        recyclerView.setRefreshing(true)
 
-        if (BuildConfig.DEBUG) {
-            Timber.d("ACCESS TOKEN %s", tokenDatabase.getAccessToken())
-        }
-
-        recyclerView.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener { loadData(fromSwipe = true) })
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.main_menu, menu)
-        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_refresh) {
-            loadData()
-            return true
+        return when(item.itemId) {
+            android.R.id.home -> {
+                drawerLayout.openDrawer(Gravity.START)
+                return true
+            }
+            R.id.nav_movies -> {viewPager.setCurrentItem(0, false); return true}
+            R.id.nav_shows -> {viewPager.setCurrentItem(1, false); return true}
+            R.id.nav_watchlist -> {viewPager.setCurrentItem(2, false); return true}
+            else -> super.onOptionsItemSelected(item)
         }
-
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun loadData(fromSwipe: Boolean = false) {
-        if (!fromSwipe)
-            recyclerView.setRefreshing(true)
-
-        presenter.loadCalendar()
-    }
-
-    fun setData(it: List<TrackedItem>) {
-        trackedItemAdapter.setItems(it)//TODO
-        recyclerView.setRefreshing(false)
-    }
-
-    fun showError(s: String) {
-        Snackbar.make(recyclerView, s, Snackbar.LENGTH_SHORT).show()
-        recyclerView.setRefreshing(false)
     }
 }

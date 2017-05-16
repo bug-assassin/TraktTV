@@ -6,7 +6,7 @@ import nucleus5.factory.ReflectionPresenterFactory
 import nucleus5.presenter.Presenter
 import nucleus5.view.PresenterLifecycleDelegate
 import nucleus5.view.ViewWithPresenter
-
+/*
 /**
  * From NucleusAppCompatActivity
  */
@@ -80,4 +80,4 @@ abstract class BaseRxActivity<P : Presenter<*>> : BaseActivity(), ViewWithPresen
         super.onDestroy()
         presenterDelegate.onDestroy(!isChangingConfigurations)
     }
-}
+}*/

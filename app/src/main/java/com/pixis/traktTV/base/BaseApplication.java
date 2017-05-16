@@ -1,5 +1,5 @@
 package com.pixis.traktTV.base;
-
+/*
 import android.app.Application;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -71,3 +71,4 @@ public class BaseApplication extends Application {
     }
 
 }
+*/

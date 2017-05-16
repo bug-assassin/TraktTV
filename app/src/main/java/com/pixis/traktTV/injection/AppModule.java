@@ -1,7 +1,7 @@
 package com.pixis.traktTV.injection;
 
 import android.app.Application;
-
+/*
 import com.pixis.traktTV.repository.RemoteRepository;
 import com.pixis.trakt_api.utils.Token.TokenDatabase;
 import com.pixis.trakt_api.TraktAPI;
@@ -32,13 +32,13 @@ public class AppModule {
     @Provides
     public Timber.Tree providesTree() {
         return new Timber.DebugTree();
-        /*if(BuildConfig.DEBUG) {
+        if(BuildConfig.DEBUG) {
             return new Timber.DebugTree();
         }
         else {
             //TODO
             throw new RuntimeException("IMPLEMENT ME");
-        }*/
+        }
     }
 
 
@@ -75,3 +75,4 @@ public class AppModule {
         return new RemoteRepository(sync, serviceCalendars, imageService);
     }
 }
+*/

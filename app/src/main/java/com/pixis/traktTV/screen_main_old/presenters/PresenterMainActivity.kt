@@ -1,11 +1,11 @@
-package com.pixis.traktTV.screen_main.presenters
-
+package com.pixis.traktTV.screen_main_old.presenters
+/*
 import android.os.Bundle
 import com.pixis.traktTV.base.BasePresenter
 import com.pixis.traktTV.repository.LocalRepository
 import com.pixis.traktTV.repository.RemoteRepository
 import com.pixis.traktTV.repository.Repository
-import com.pixis.traktTV.screen_main.MainActivity
+import com.pixis.traktTV.screen_main_old.MainActivity
 import io.realm.Realm
 import timber.log.Timber
 import java.io.IOException
@@ -57,4 +57,4 @@ class PresenterMainActivity : BasePresenter<MainActivity>() {
     fun loadCalendar() {
         start(GET_CALENDAR)
     }
-}
+}*/

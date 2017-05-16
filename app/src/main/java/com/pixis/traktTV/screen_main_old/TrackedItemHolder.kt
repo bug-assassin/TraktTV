@@ -1,13 +1,12 @@
-package com.pixis.traktTV.screen_main
+package com.pixis.traktTV.screen_main_old
 
 import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
 import com.pixis.traktTV.R
 import com.pixis.traktTV.base.adapters.BaseViewHolder
-import com.pixis.traktTV.data.models.TrackedItem
 import com.squareup.picasso.Picasso
-
+/*
 class TrackedItemHolder : BaseViewHolder<TrackedItem>() {
 
     //TV Show Poster
@@ -34,3 +33,4 @@ class TrackedItemHolder : BaseViewHolder<TrackedItem>() {
         Picasso.with(itemView.context).load(item.poster_path).into(imgItem)
     }
 }
+*/

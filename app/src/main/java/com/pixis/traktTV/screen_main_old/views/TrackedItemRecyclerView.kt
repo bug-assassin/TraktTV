@@ -1,4 +1,4 @@
-package com.pixis.traktTV.screen_main.views
+package com.pixis.traktTV.screen_main_old.views
 
 import android.content.Context
 import android.util.AttributeSet

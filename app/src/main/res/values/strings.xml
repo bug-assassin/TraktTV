@@ -11,4 +11,9 @@
     <string name="no_items_in_watchlist">WatchList is Empty</string>
     <string name="menu_refresh">Refresh</string>
     <string name="error_message">An internal error has occurred</string>
+
+    <!-- Nav Bar -->
+    <string name="nav_shows">Shows</string>
+    <string name="nav_movies">Movies</string>
+    <string name="nav_watchlist">Watchlist</string>
 </resources>

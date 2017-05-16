@@ -1,5 +1,5 @@
 package com.pixis.traktTV.screen_login
-
+/*
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,7 @@ import com.pixis.traktTV.R
 import com.pixis.traktTV.base.BaseActivity
 import com.pixis.traktTV.screen_login.views.AuthDialog
 import com.pixis.traktTV.screen_login.views.AuthDialogResultListener
-import com.pixis.traktTV.screen_main.MainActivity
+import com.pixis.traktTV.screen_main_old.MainActivity
 import com.pixis.trakt_api.utils.Token.TokenDatabase
 import com.pixis.trakt_api.services_trakt.Authentication
 import com.pixis.trakt_api.utils.applySchedulers
@@ -80,3 +80,4 @@ class LoginActivity : BaseActivity() {
 private fun Intent.withBackStackCleared(): Intent {
     return this.addFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP or android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
 }
+*/

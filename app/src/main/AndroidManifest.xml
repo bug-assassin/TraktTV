@@ -5,25 +5,18 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name=".base.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <meta-data android:name="TRAKT_CLIENT_ID" android:value="@string/client_id"/>
-        <meta-data android:name="TRAKT_API_TARGET" android:value="@string/api_target" />
-        <meta-data android:name="FAN_ART_API_KEY" android:value="@string/fanart_api_key" />
 
         <activity android:name=".screen_main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".screen_login.LoginActivity"></activity>
     </application>
 
 </manifest>

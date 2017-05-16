@@ -1,5 +1,5 @@
 package com.pixis.traktTV.base
-
+/*
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -28,4 +28,4 @@ abstract class BaseActivity: AppCompatActivity(), ActivityFragmentCommon {
         return this
     }
 
-}
+}*/
