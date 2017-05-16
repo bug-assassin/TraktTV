@@ -1,28 +1,31 @@
 package com.pixis.trakt_api
 
-import com.pixis.trakt_api.image_api.FanArtImage
-import com.pixis.trakt_api.image_api.FanArtMedia
-import com.pixis.trakt_api.image_api.ImageLoading
+import com.pixis.trakt_api.services_fanart.FanArtImage
+import com.pixis.trakt_api.services_fanart.ImageService
 import okhttp3.logging.HttpLoggingInterceptor
 import org.junit.Before
 import org.junit.Test
 
-class FanArtImagesTest {
-    val api_key = "c9a9bbee5c1550e6556dbf36d6d25dbd"
+class FanArtAPITest {
 
-    lateinit var imageLoadingAPI: ImageLoading
+    val baseURL = "http://webservice.fanart.tv/v3/"
+    val fanArtApiKey = "c9a9bbee5c1550e6556dbf36d6d25dbd"
+
+
+    lateinit var imageService: ImageService
 
     @Before
     fun init() {
         val loggingIntercepter = HttpLoggingInterceptor()
         loggingIntercepter.level = HttpLoggingInterceptor.Level.BODY
 
-        val fanArtApi = FanArtAPI(api_key)
+        val retrofit = RestAPI.createRetrofit(baseURL,
+                FanArtAPI.createOkHttpClient(fanArtApiKey)
+                .addInterceptor(loggingIntercepter)
+                .build()
+        )
 
-        val okHttp = fanArtApi.createOkHttpClient().addInterceptor(loggingIntercepter).build()
-        val imageRetrofit = fanArtApi.createRetrofit(okHttp).build()
-
-        imageLoadingAPI = imageRetrofit.create(ImageLoading::class.java)
+        imageService = retrofit.create(ImageService::class.java)
     }
 
     @Test
@@ -36,12 +39,11 @@ class FanArtImagesTest {
     }
 
     @Test
-    fun TestImageLoading() {
+    fun TestShowImages() {
         val showId = 296762
         val showName = "Westworld"
 
-        val loadedImages = imageLoadingAPI
-                                .getImages(FanArtMedia.SHOW, showId.toString()).blockingGet()
+        val loadedImages = imageService.getShowImages(showId.toString()).blockingGet()
 
         assert(loadedImages.thetvdb_id == showId)
         assert(loadedImages.name == showName)

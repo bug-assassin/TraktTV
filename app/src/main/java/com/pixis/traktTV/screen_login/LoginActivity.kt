@@ -11,8 +11,8 @@ import com.pixis.traktTV.base.BaseActivity
 import com.pixis.traktTV.screen_login.views.AuthDialog
 import com.pixis.traktTV.screen_login.views.AuthDialogResultListener
 import com.pixis.traktTV.screen_main.MainActivity
-import com.pixis.trakt_api.Token.TokenDatabase
-import com.pixis.trakt_api.services.Authentication
+import com.pixis.trakt_api.utils.Token.TokenDatabase
+import com.pixis.trakt_api.services_trakt.Authentication
 import com.pixis.trakt_api.utils.applySchedulers
 import timber.log.Timber
 import javax.inject.Inject

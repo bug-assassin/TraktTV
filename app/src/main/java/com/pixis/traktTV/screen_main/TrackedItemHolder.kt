@@ -1,4 +1,4 @@
-package com.pixis.traktTV.adapters.viewholders
+package com.pixis.traktTV.screen_main
 
 import android.widget.ImageView
 import android.widget.TextView

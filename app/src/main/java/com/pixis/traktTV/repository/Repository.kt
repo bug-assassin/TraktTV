@@ -1,13 +1,10 @@
 package com.pixis.traktTV.repository
 
 import com.pixis.traktTV.data.models.TrackedItem
-import com.pixis.trakt_api.models.CalendarShowEntry
 import io.reactivex.Observable
 import io.realm.RealmModel
-import com.pixis.traktTV.views.Utils.showError
 import com.pixis.trakt_api.utils.applySchedulers
 import io.reactivex.Single
-import io.reactivex.internal.functions.Functions
 
 //Inspired by https://github.com/FabianTerhorst/ApiClient/blob/master/apiclient/src/main/java/io/fabianterhorst/apiclient/ApiObserver.java
 class Repository(val remoteRepo: RemoteRepository, val localRepo: LocalRepository) {

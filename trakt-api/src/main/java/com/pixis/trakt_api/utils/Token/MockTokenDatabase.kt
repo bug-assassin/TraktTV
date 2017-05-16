@@ -1,6 +1,6 @@
-package com.pixis.trakt_api.Token
+package com.pixis.trakt_api.utils.Token
 
-import com.pixis.trakt_api.models.AccessToken
+import com.pixis.trakt_api.services_trakt.models.AccessToken
 
 class MockTokenDatabase(val mAccessToken : String) : TokenStorage {
 

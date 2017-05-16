@@ -1,8 +1,8 @@
-package com.pixis.trakt_api.Token
+package com.pixis.trakt_api.utils.Token
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.pixis.trakt_api.models.AccessToken
+import com.pixis.trakt_api.services_trakt.models.AccessToken
 
 class TokenDatabase(val context: Context) : TokenStorage {
 

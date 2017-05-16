@@ -1,10 +1,9 @@
 package com.pixis.traktTV.injection;
 
 import com.pixis.trakt_api.FanArtAPI;
-import com.pixis.trakt_api.image_api.ImageLoading;
-import com.pixis.trakt_api.services.Authentication;
-import com.pixis.trakt_api.services.ServiceCalendars;
-import com.pixis.trakt_api.services.Sync;
+import com.pixis.trakt_api.services_fanart.ImageService;
+import com.pixis.trakt_api.services_trakt.Authentication;
+import com.pixis.trakt_api.services_trakt.Sync;
 
 import javax.inject.Singleton;
 
@@ -41,11 +40,11 @@ public class NetworkModule {
 
     @Singleton
     @Provides
-    ImageLoading providesImageLoadingAPI() {
+    ImageService providesImageLoadingAPI() {
         FanArtAPI fanArtApi = new FanArtAPI(fanArtApiKey);
         OkHttpClient okHttp = fanArtApi.createOkHttpClient().build();
         Retrofit imageRetrofit = fanArtApi.createRetrofit(okHttp).build();
 
-        return imageRetrofit.create(ImageLoading.class);
+        return imageRetrofit.create(ImageService.class);
     }
 }

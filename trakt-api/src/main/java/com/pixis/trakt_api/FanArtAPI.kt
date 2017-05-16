@@ -5,11 +5,9 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class FanArtAPI(val fanArtApiKey : String) {
+object FanArtAPI {
 
-    val baseUrl : String = "http://webservice.fanart.tv/v3/"
-
-    fun createOkHttpClient(): OkHttpClient.Builder {
+    fun createOkHttpClient(fanArtApiKey : String): OkHttpClient.Builder {
         val okHttpClient = OkHttpClient.Builder()
         okHttpClient.addInterceptor { chain ->
             val original = chain.request()
@@ -23,14 +21,4 @@ class FanArtAPI(val fanArtApiKey : String) {
 
         return okHttpClient
     }
-
-    fun createRetrofit(okHttpClient: OkHttpClient): Retrofit.Builder {
-        return Retrofit
-                .Builder()
-                .baseUrl(baseUrl)
-                .client(okHttpClient)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(MoshiConverterFactory.create())
-    }
-
 }

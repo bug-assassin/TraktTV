@@ -1,4 +1,4 @@
-package com.pixis.trakt_api.models
+package com.pixis.trakt_api.services_trakt.models
 
 data class AccessToken(var access_token: String,
                        var token_type: String,

@@ -1,16 +1,17 @@
 package com.pixis.trakt_api
 
-import com.pixis.trakt_api.Token.TokenStorage
-import com.squareup.moshi.Moshi
+import com.pixis.trakt_api.utils.Token.TokenStorage
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class TraktAPI(val tokenStorage: TokenStorage) {
+object TraktAPI {
 
-    fun createOkHttpClient(client_id: String): OkHttpClient.Builder {
+    fun createOkHttpClient(client_id: String, tokenStorage: TokenStorage): OkHttpClient.Builder {
         val okHttpClient = OkHttpClient.Builder()
+
+        //Authorization
         okHttpClient.addInterceptor { chain ->
             val original = chain.request()
 
@@ -22,6 +23,7 @@ class TraktAPI(val tokenStorage: TokenStorage) {
             return@addInterceptor chain.proceed(newRequest)
         }
 
+        //Authentication
         okHttpClient.addInterceptor { chain ->
             var newRequest = chain.request()
             if (tokenStorage.isAuthenticated()) {
@@ -55,21 +57,6 @@ class TraktAPI(val tokenStorage: TokenStorage) {
         }*/
 
         return okHttpClient
-    }
-
-    fun createRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit.Builder {
-        return Retrofit
-                .Builder()
-                .baseUrl(baseUrl)
-                .client(okHttpClient)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(MoshiConverterFactory.create())
-    }
-
-    fun refreshToken() : String {
-        //TODO
-        //tokenStorage.getToken().refresh_token
-        return ""
     }
 
 }

@@ -1,20 +1,15 @@
-package com.pixis.trakt_api.image_api
+package com.pixis.trakt_api.services_fanart
 
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface ImageLoading {
-    @GET("{media}/{id}")
-    fun getImages(@Path("media") media : FanArtMedia, @Path("id") tvdb_id : String) : Single<FanArtImages>
-}
+interface ImageService {
+    @GET("movies/{id}")
+    fun getMovieImages(@Path("id") tvdb_id : String) : Single<FanArtImages>
 
-enum class FanArtMedia(val stringValue : String) {
-    SHOW("tv");
-
-    override fun toString(): String {
-        return stringValue
-    }
+    @GET("tv/{id}")
+    fun getShowImages(@Path("id") tvdb_id : String) : Single<FanArtImages>
 }
 
 data class FanArtImages(val name : String,
@@ -34,5 +29,4 @@ data class FanArtImages(val name : String,
 
 data class FanArtImage(val id : String, val url : String, val lang : String, val likes : Int, val season: String = "all") {
     val preview_url: String = url.replace("/fanart/", "/preview/")
-
 }

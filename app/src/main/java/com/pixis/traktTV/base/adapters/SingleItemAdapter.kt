@@ -14,13 +14,9 @@ interface OnItemClickListener<T> {
 
 class SingleItemAdapter<T>(private val mContext: Context, private val listenerTracked: OnItemClickListener<T>?, private val viewHolder: BaseViewHolder<T>) : RecyclerView.Adapter<BindableViewHolder<T>>() {
 
-    private var mData: List<T>
+    private var mData: List<T> = emptyList()
 
-    init {
-        mData = ArrayList<T>()
-    }
-
-    fun setItems(data: List<T>) {
+    fun update(data: List<T>) {
         this.mData = data
         notifyDataSetChanged()
     }

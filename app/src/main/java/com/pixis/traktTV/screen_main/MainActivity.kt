@@ -11,13 +11,12 @@ import butterknife.BindView
 import com.pixis.traktTV.BuildConfig
 import com.pixis.traktTV.R
 import com.pixis.traktTV.adapters.SingleItemAdapter
-import com.pixis.traktTV.adapters.viewholders.TrackedItemHolder
 import com.pixis.traktTV.base.BaseRxActivity
 import com.pixis.traktTV.data.models.TrackedItem
 import com.pixis.traktTV.screen_login.LoginActivity
 import com.pixis.traktTV.screen_main.presenters.PresenterMainActivity
 import com.pixis.traktTV.views.AdvancedRecyclerView
-import com.pixis.trakt_api.Token.TokenDatabase
+import com.pixis.trakt_api.utils.Token.TokenDatabase
 import nucleus5.factory.RequiresPresenter
 import timber.log.Timber
 import javax.inject.Inject

@@ -3,11 +3,10 @@ package com.pixis.traktTV.injection;
 import android.app.Application;
 
 import com.pixis.traktTV.repository.RemoteRepository;
-import com.pixis.trakt_api.Token.TokenDatabase;
+import com.pixis.trakt_api.utils.Token.TokenDatabase;
 import com.pixis.trakt_api.TraktAPI;
-import com.pixis.trakt_api.image_api.ImageLoading;
-import com.pixis.trakt_api.services.ServiceCalendars;
-import com.pixis.trakt_api.services.Sync;
+import com.pixis.trakt_api.services_fanart.ImageService;
+import com.pixis.trakt_api.services_trakt.Sync;
 
 import javax.inject.Singleton;
 
@@ -72,7 +71,7 @@ public class AppModule {
 
     @Singleton
     @Provides
-    RemoteRepository providesRemoteRepo(Sync sync, ServiceCalendars serviceCalendars, ImageLoading imageLoading) {
-        return new RemoteRepository(sync, serviceCalendars, imageLoading);
+    RemoteRepository providesRemoteRepo(Sync sync, ServiceCalendars serviceCalendars, ImageService imageService) {
+        return new RemoteRepository(sync, serviceCalendars, imageService);
     }
 }

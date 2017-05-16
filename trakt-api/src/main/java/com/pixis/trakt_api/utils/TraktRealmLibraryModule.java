@@ -1,4 +1,4 @@
-package com.pixis.trakt_api.realmmodule;
+package com.pixis.trakt_api.utils;
 
 import io.realm.annotations.RealmModule;
 

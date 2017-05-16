@@ -1,7 +1,6 @@
-package com.pixis.trakt_api.services
+package com.pixis.trakt_api.services_trakt
 
-import com.pixis.trakt_api.models.AccessToken
-import io.reactivex.Observable
+import com.pixis.trakt_api.services_trakt.models.AccessToken
 import io.reactivex.Single
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

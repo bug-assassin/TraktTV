@@ -9,11 +9,10 @@ import com.pixis.traktTV.injection.AppModule;
 import com.pixis.traktTV.injection.ApplicationComponent;
 import com.pixis.traktTV.injection.DaggerApplicationComponent;
 import com.pixis.traktTV.injection.NetworkModule;
-import com.pixis.trakt_api.realmmodule.TraktRealmLibraryModule;
+import com.pixis.trakt_api.utils.TraktRealmLibraryModule;
 
 import javax.inject.Inject;
 
-import io.reactivex.plugins.RxJavaPlugins;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import timber.log.Timber;
