@@ -18,7 +18,7 @@ open class BaseTest {
         val loggingIntercepter = HttpLoggingInterceptor()
         loggingIntercepter.level = loggingLevel
 
-        val tokenStorage : TokenStorage = MockTokenDatabase("1")//BuildConfig.MOCK_AUTHENTICATION_TOKEN)
+        val tokenStorage : TokenStorage = MockTokenDatabase(BuildConfig.MOCK_AUTHENTICATION_TOKEN)
 
         val networkService = TraktAPI(tokenStorage = tokenStorage)
         val okHttpClient = networkService.createOkHttpClient(client_id).addInterceptor(loggingIntercepter).build()
