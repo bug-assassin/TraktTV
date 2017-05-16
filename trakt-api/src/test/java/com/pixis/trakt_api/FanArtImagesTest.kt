@@ -41,23 +41,17 @@ class FanArtImagesTest {
         val showName = "Westworld"
 
         val loadedImages = imageLoadingAPI
-                                .getImages(FanArtMedia.SHOW, showId.toString())
-                                .blockingFirst()
+                                .getImages(FanArtMedia.SHOW, showId.toString()).blockingGet()
 
         assert(loadedImages.thetvdb_id == showId)
         assert(loadedImages.name == showName)
 
-        assert(loadedImages.hdclearart.size > 0)
-        assert(loadedImages.hdtvlogo.size > 0)
-        assert(loadedImages.showbackground.size > 0)
-        assert(loadedImages.tvbanner.size > 0)
-        assert(loadedImages.tvposter.size > 0)
-        @Suppress("SENSELESS_COMPARISON")
-        assert(loadedImages.tvposter[0].url != null)
-        @Suppress("SENSELESS_COMPARISON")
-        assert(loadedImages.tvposter[0].preview_url != null)
-
-        assert(loadedImages.tvthumb.size > 0)
+        assert(loadedImages.hdclearart.isNotEmpty())
+        assert(loadedImages.hdtvlogo.isNotEmpty())
+        assert(loadedImages.showbackground.isNotEmpty())
+        assert(loadedImages.tvbanner.isNotEmpty())
+        assert(loadedImages.tvposter.isNotEmpty())
+        assert(loadedImages.tvthumb.isNotEmpty())
     }
 
 }

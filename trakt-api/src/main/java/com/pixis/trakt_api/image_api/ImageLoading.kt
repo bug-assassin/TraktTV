@@ -1,13 +1,12 @@
 package com.pixis.trakt_api.image_api
 
-import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface ImageLoading {
-    //TODO
     @GET("{media}/{id}")
-    fun getImages(@Path("media") media : FanArtMedia, @Path("id") tvdb_id : String) : Observable<FanArtImages>
+    fun getImages(@Path("media") media : FanArtMedia, @Path("id") tvdb_id : String) : Single<FanArtImages>
 }
 
 enum class FanArtMedia(val stringValue : String) {

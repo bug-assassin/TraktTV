@@ -21,6 +21,9 @@ cache:
   directories:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
+after_failure:
+- "cat app/build/reports/tests/testDebugUnitTest/index.html"
+- "cat trakt-api/build/reports/tests/testDebugUnitTest/index.html"
 env:
   global:
   - secure: BMUfc+8yof5C31geyXdoo9++PoKEPwLUDj2SUAD6UFtsMDAyPS8t0iLCt1e5EEQ4L7ulz4h527rgVJHHg38P0y+iLsHsObQrunHbCbDg5LJFn/3XwmNCmAD25SPY1Lst7HxzDM4hdnmskV3/McCvmI+XJOLei0C8OkNFtGocTAR9q2aVpq1x3bTEQyWI7JBSrdJix2opn5Av2W+2immnmVsE6ah6mhupYd9hvOUT5uk+dbygoeNqhUxaSPEe+GQ5ttMSfRHeBJMrIzHt72IxYmx8CUyL2GwgcShk77o8m0/vEPjiee/lFpDJQF1TED2JUm8EcTzIjfjKU9oKaC+mM7oxwmZkmNP/DGHr75aGuRmwmkwP4GvNqMprTI7PEGD2SNrs3xbDPnpa3XnavOSAijNVRUxWkOKw+S7Ze7Tvmd11MSY0J+gCMMULmt9ypYi633MkZwFsmdOw1Le2QX1Im8lPWlYhx+41OkMyVlTLcegv0cst0k6GzNwuIHbWAkJujpZBXJsTaPuiTt04toW13PKACBSOT1b2FuSrpdH6a7jNf1pvbSkgpCevcVDXNfr26sUhRj3SSNujGIoer6Y/ODWfJb4qKI4lALH2BreU04Sg+69tW2Y4ontvtZWbQQCl9KtGJbehOOsUBG9JY1PK1t8enTqbFFNcGTkVdE1MYXw=
