@@ -19,9 +19,9 @@ class RemoteRepository(private val syncService: Sync, private val serviceCalenda
         return syncService.getWatchListShows()
                 .flatMap { Observable.fromIterable(it) }
                 .flatMap {
-                    val show = Observable.just(it)
-                    val showImage = imageLoadingAPI.getImages(FanArtMedia.SHOW, it.show.ids.tvdb)
-                    return@flatMap Observable.combineLatest(show, showImage, asPair<TraktShow, FanArtImages>())
+                    val show = Single.just(it)
+                    val showImage = imageLoadingAPI.getImages(FanArtMedia.SHOW, it.show.ids.tvdb).ambWith {  }
+                    return@flatMap show.zipWith(showImage, asPair()).toObservable()
                 }
                 .map { it -> TrackedItem(traktId = it.first.show.ids.trakt, title = it.first.show.title, poster_path = it.second.tvposter[0].preview_url) }
                 .toList()
