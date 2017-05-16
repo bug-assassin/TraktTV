@@ -12,7 +12,7 @@ class TraktAPITest {
     @Before
     fun init() {
         val loggingIntercepter = HttpLoggingInterceptor()
-        loggingIntercepter.level = HttpLoggingInterceptor.Level.BODY
+        loggingIntercepter.level = HttpLoggingInterceptor.Level.NONE
 
         val tokenStorage = MockTokenDatabase(BuildConfig.MOCK_AUTHENTICATION_TOKEN)
 

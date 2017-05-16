@@ -17,7 +17,7 @@ class FanArtAPITest {
     @Before
     fun init() {
         val loggingIntercepter = HttpLoggingInterceptor()
-        loggingIntercepter.level = HttpLoggingInterceptor.Level.BODY
+        loggingIntercepter.level = HttpLoggingInterceptor.Level.NONE
 
         val retrofit = RestAPI.createRetrofit(baseURL,
                 FanArtAPI.createOkHttpClient(fanArtApiKey)

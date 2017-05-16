@@ -33,8 +33,4 @@ class Repository(val remoteRepo: RemoteRepository, val localRepo: LocalRepositor
         //}
     }
 
-    fun getShowsNextDays(days: Int): Observable<List<CalendarShowEntry>> {
-        return remoteRepo.getShowsNextDays(days)
-    }
-
 }
