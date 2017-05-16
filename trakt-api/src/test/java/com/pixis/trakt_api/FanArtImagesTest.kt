@@ -46,7 +46,6 @@ class FanArtImagesTest {
         assert(loadedImages.thetvdb_id == showId)
         assert(loadedImages.name == showName)
 
-        assert(loadedImages.hdclearart.isNotEmpty())
         assert(loadedImages.hdtvlogo.isNotEmpty())
         assert(loadedImages.showbackground.isNotEmpty())
         assert(loadedImages.tvbanner.isNotEmpty())
