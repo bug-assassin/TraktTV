@@ -8,8 +8,8 @@ import org.junit.Test
 
 class FanArtAPITest {
 
-    val baseURL = "http://webservice.fanart.tv/v3/"
-    val fanArtApiKey = "c9a9bbee5c1550e6556dbf36d6d25dbd"
+    val fanart_baseURL = BuildConfig.fanart_baseURL
+    val fanart_ApiKey = BuildConfig.fanart_ApiKey
 
 
     lateinit var imageService: ImageService
@@ -19,8 +19,8 @@ class FanArtAPITest {
         val loggingIntercepter = HttpLoggingInterceptor()
         loggingIntercepter.level = HttpLoggingInterceptor.Level.NONE
 
-        val retrofit = RestAPI.createRetrofit(baseURL,
-                FanArtAPI.createOkHttpClient(fanArtApiKey)
+        val retrofit = RestAPI.createRetrofit(fanart_baseURL,
+                FanArtAPI.createOkHttpClient(fanart_ApiKey)
                 .addInterceptor(loggingIntercepter)
                 .build()
         )

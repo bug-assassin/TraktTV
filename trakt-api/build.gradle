@@ -18,7 +18,11 @@ android {
     }
     buildTypes {
         buildTypes.each {
-            it.buildConfigField "String", "MOCK_AUTHENTICATION_TOKEN", project.hasProperty("MOCK_AUTHENTICATION_TOKEN") ? "\"${project.getProperty('MOCK_AUTHENTICATION_TOKEN')}\"" : "\"${System.getenv('MOCK_AUTHENTICATION_TOKEN')}\""
+            it.buildConfigField "String", "MOCK_AUTHENTICATION_TOKEN", getKeyValue("MOCK_AUTHENTICATION_TOKEN")
+            it.buildConfigField "String", "trakt_baseURL", getKeyValue("trakt_baseURL")
+            it.buildConfigField "String", "trakt_client_id", getKeyValue("trakt_client_id")
+            it.buildConfigField "String", "fanart_baseURL", getKeyValue("fanart_baseURL")
+            it.buildConfigField "String", "fanart_ApiKey", getKeyValue("fanart_ApiKey")
         }
         release {
             minifyEnabled false

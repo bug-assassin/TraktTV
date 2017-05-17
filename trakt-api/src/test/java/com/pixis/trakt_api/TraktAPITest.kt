@@ -1,13 +1,20 @@
 package com.pixis.trakt_api
 
+import com.pixis.trakt_api.services_trakt.MovieService
+import com.pixis.trakt_api.services_trakt.ShowService
 import com.pixis.trakt_api.utils.Token.MockTokenDatabase
 import okhttp3.logging.HttpLoggingInterceptor
 import org.junit.Before
+import org.junit.Test
 
 
 class TraktAPITest {
-    val baseURL = "https://api.trakt.tv"
-    val client_id = "fdacbaf7fe41bc6d5bf179a4a2f3d261a5ff5d8ae2e9fcc9eef48b37bb043c20"
+    val trakt_baseURL = BuildConfig.trakt_baseURL
+    val trakt_client_id = BuildConfig.trakt_client_id
+
+
+    lateinit var movieService: MovieService
+    lateinit var showService: ShowService
 
     @Before
     fun init() {
@@ -16,12 +23,23 @@ class TraktAPITest {
 
         val tokenStorage = MockTokenDatabase(BuildConfig.MOCK_AUTHENTICATION_TOKEN)
 
-        val retrofit = RestAPI.createRetrofit(baseURL,
-                TraktAPI.createOkHttpClient(client_id, tokenStorage)
+        val retrofit = RestAPI.createRetrofit(trakt_baseURL,
+                TraktAPI.createOkHttpClient(trakt_client_id, tokenStorage)
                         .addInterceptor(loggingIntercepter)
                         .build()
         )
 
+        movieService = retrofit.create(MovieService::class.java)
+        showService = retrofit.create(ShowService::class.java)
+    }
 
+    @Test
+    fun TestGetTrendingMovies() {
+        assert(movieService.getTrendingMovies().blockingGet().size > 0)
+    }
+
+    @Test
+    fun TestGetTrendingShows() {
+        assert(showService.getTrendingShows().blockingGet().size > 0)
     }
 }

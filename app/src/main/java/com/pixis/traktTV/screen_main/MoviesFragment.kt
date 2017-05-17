@@ -10,10 +10,10 @@ import com.pixis.traktTV.R
 
 class MoviesFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.activity_main_movies, container, false)
+        return inflater.inflate(R.layout.activity_main_recyclerview, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        (view.findViewById(R.id.textView) as TextView).text = Math.random().toString()
+
     }
 }

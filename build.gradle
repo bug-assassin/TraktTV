@@ -17,6 +17,9 @@ buildscript {
         realm_version = '3.1.4'
         nucleus_version = '5.0.0-beta1'
     }
+    ext.getKeyValue = { keyName ->
+        return project.hasProperty(keyName) ? "\"${project.getProperty(keyName)}\"" : "\"${System.getenv(keyName)}\""
+    }
 
     repositories {
         jcenter()

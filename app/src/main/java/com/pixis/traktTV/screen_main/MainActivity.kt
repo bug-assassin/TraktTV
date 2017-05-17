@@ -36,7 +36,7 @@ class MainActivity: AppCompatActivity() {
 
         viewPager = findViewById(R.id.viewpager) as ViewPager
         viewPager.adapter = object : FragmentPagerAdapter(supportFragmentManager) {
-            val fragments = listOf(MoviesFragment(), MoviesFragment(), MoviesFragment())
+            val fragments = listOf(MoviesFragment(), ShowsFragment(), MoviesFragment())
             val titles = listOf("Trending Movies", "Trending Shows", "Watchlist")
 
             override fun getItem(position: Int): Fragment {

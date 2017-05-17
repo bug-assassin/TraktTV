@@ -12,9 +12,15 @@ interface OnItemClickListener<T> {
     fun onTrackedItemLongClick(item: T, viewHolder: BindableViewHolder<T>, position: Int)
 }
 
-class SingleItemAdapter<T>(private val mContext: Context, private val listenerTracked: OnItemClickListener<T>?, private val viewHolder: BaseViewHolder<T>) : RecyclerView.Adapter<BindableViewHolder<T>>() {
+class SingleItemAdapter<T>(private val viewHolder: BaseViewHolder<T>) : RecyclerView.Adapter<BindableViewHolder<T>>() {
 
     private var mData: List<T> = emptyList()
+
+    private var listenerTracked: OnItemClickListener<T>? = null
+
+    fun setListener(listener: OnItemClickListener<T>) {
+        this.listenerTracked = listener
+    }
 
     fun update(data: List<T>) {
         this.mData = data
@@ -22,7 +28,7 @@ class SingleItemAdapter<T>(private val mContext: Context, private val listenerTr
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindableViewHolder<T> {
-        val v = LayoutInflater.from(mContext).inflate(viewHolder.layoutId, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(viewHolder.layoutId, parent, false)
         return BindableViewHolder<T>(v, viewHolder)
     }
 
