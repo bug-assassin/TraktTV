@@ -1,4 +1,4 @@
-package com.pixis.traktTV.screen_login.views
+/*package com.pixis.traktTV.screen_login.views
 
 import android.app.Activity
 import android.app.DialogFragment
@@ -90,3 +90,4 @@ class AuthDialog(val listener: AuthDialogResultListener) : DialogFragment() {
         dismiss()
     }
 }
+*/

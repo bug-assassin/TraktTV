@@ -1,5 +1,5 @@
 package com.pixis.traktTV
 
-class RemoteRepositoryTest {
+class RepositoryTest {
     //TODO
 }

@@ -35,7 +35,7 @@ class FanArtAPITest {
 
         val fanArtImage = FanArtImage(id = "a", url = url, lang = "en", likes = 1, season = "all")
 
-        assert(fanArtImage.preview_url == preview_url)
+        assert(fanArtImage.getPreviewUrl() == preview_url)
     }
 
     @Test

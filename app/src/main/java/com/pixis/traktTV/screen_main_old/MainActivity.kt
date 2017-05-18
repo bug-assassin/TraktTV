@@ -51,7 +51,7 @@ class MainActivity : BaseRxActivity<PresenterMainActivity>() {
         }
 
         trackedItemAdapter = SingleItemAdapter(this, TrackedItemHolder())
-        recyclerView.setAdapter(trackedItemAdapter)
+        recyclerView.setMAdapter(trackedItemAdapter)
         recyclerView.setRefreshing(true)
 
         if (BuildConfig.DEBUG) {

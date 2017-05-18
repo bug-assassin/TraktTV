@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import butterknife.ButterKnife
-import com.pixis.traktTV.injection.ApplicationComponent
+import com.pixis.traktTV.base.injection.ApplicationComponent
 
 
 abstract class BaseActivity: AppCompatActivity(), ActivityFragmentCommon {

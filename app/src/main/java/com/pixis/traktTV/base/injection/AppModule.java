@@ -1,6 +1,5 @@
-package com.pixis.traktTV.injection;
+package com.pixis.traktTV.base.injection;
 
-import android.app.Application;
 /*
 import com.pixis.traktTV.repository.RemoteRepository;
 import com.pixis.trakt_api.utils.Token.TokenDatabase;

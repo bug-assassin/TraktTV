@@ -28,5 +28,5 @@ data class FanArtImages(val name : String,
                         val seasonbanner: List<FanArtImage> = ArrayList())
 
 data class FanArtImage(val id : String, val url : String, val lang : String, val likes : Int, val season: String = "all") {
-    val preview_url: String = url.replace("/fanart/", "/preview/")
+    fun getPreviewUrl() = url.replace("/fanart/", "/preview/")
 }

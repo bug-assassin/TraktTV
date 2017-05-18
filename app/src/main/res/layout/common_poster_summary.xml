@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
+    <com.pixis.traktTV.views.RatioImageView
         android:id="@+id/imgMediaItem"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
