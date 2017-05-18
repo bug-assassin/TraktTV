@@ -15,7 +15,11 @@ class Repository(private val movieService: MovieService,
                  private val imageService: ImageService) {
 
     fun getTrendingMovies(): Observable<List<Pair<Movie, FanArtImages>>> {
-        return Observable.empty()
+        return movieService.getTrendingMovies().flatMap {
+            return@flatMap Observable.fromIterable(it).flatMap {
+                Observable.just(it.movie).zipWith(imageService.getShowImages(it.movie.ids.tvdb).toObservable(), asPair<Movie, FanArtImages>())
+            }.toList()
+        }.toObservable().applySchedulers()
     }
 
     fun getTrendingShows(): Observable<List<Pair<Show, FanArtImages>>> {

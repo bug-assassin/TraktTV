@@ -1,29 +1,28 @@
 package com.pixis.traktTV.adapters
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.pixis.traktTV.base.adapters.BaseViewHolder
 import com.pixis.traktTV.base.adapters.BindableViewHolder
+import io.reactivex.functions.Consumer
+import io.reactivex.subjects.PublishSubject
 
 interface OnItemClickListener<T> {
     fun onTrackedItemClicked(item: T, viewHolder: BindableViewHolder<T>, position: Int)
     fun onTrackedItemLongClick(item: T, viewHolder: BindableViewHolder<T>, position: Int)
 }
 
-class SingleItemAdapter<T>(private val viewHolder: BaseViewHolder<T>) : RecyclerView.Adapter<BindableViewHolder<T>>() {
+data class ClickEvent<T>(val item: T, val view: BaseViewHolder<T>, val position: Int, val isLongClick: Boolean)
+
+class RecyclerListAdapter<T>(private val viewHolder: BaseViewHolder<T>) : RecyclerView.Adapter<BindableViewHolder<T>>() {
 
     private var mData: List<T> = emptyList()
 
-    private var listenerTracked: OnItemClickListener<T>? = null
+    var clickObservable: PublishSubject<ClickEvent<T>> = PublishSubject.create<ClickEvent<T>>()
 
-    fun setListener(listener: OnItemClickListener<T>) {
-        this.listenerTracked = listener
-    }
-
-    fun update(data: List<T>) {
-        this.mData = data
+    var consumer: Consumer<in List<T>> = Consumer {
+        mData = it
         notifyDataSetChanged()
     }
 
@@ -37,12 +36,12 @@ class SingleItemAdapter<T>(private val viewHolder: BaseViewHolder<T>) : Recycler
         holder.onBind(mTrackedItem)
 
         holder.itemView.setOnLongClickListener {
-            listenerTracked?.onTrackedItemLongClick(mTrackedItem, holder, position)
+            clickObservable.onNext(ClickEvent(mTrackedItem, holder.baseViewHolder, position, isLongClick = true))
             return@setOnLongClickListener true
         }
 
         holder.itemView.setOnClickListener {
-            listenerTracked?.onTrackedItemClicked(mTrackedItem, holder, position)
+            clickObservable.onNext(ClickEvent(mTrackedItem, holder.baseViewHolder, position, isLongClick = false))
         }
     }
 

@@ -10,7 +10,7 @@ import android.view.MenuItem
 import butterknife.BindView
 import com.pixis.traktTV.BuildConfig
 import com.pixis.traktTV.R
-import com.pixis.traktTV.adapters.SingleItemAdapter
+import com.pixis.traktTV.adapters.RecyclerListAdapter
 import com.pixis.traktTV.base.BaseRxActivity
 import com.pixis.traktTV.screen_login.LoginActivity
 import com.pixis.traktTV.screen_main_old.presenters.PresenterMainActivity
@@ -31,7 +31,7 @@ class MainActivity : BaseRxActivity<PresenterMainActivity>() {
     lateinit var recyclerView: AdvancedRecyclerView
     @BindView(R.id.fabMainAction)
     lateinit var fabMainAction: FloatingActionButton
-    lateinit var trackedItemAdapter: SingleItemAdapter<TrackedItem>
+    lateinit var trackedItemAdapter: RecyclerListAdapter<TrackedItem>
 
     @Inject
     lateinit var tokenDatabase: TokenDatabase
@@ -50,7 +50,7 @@ class MainActivity : BaseRxActivity<PresenterMainActivity>() {
             return
         }
 
-        trackedItemAdapter = SingleItemAdapter(this, TrackedItemHolder())
+        trackedItemAdapter = RecyclerListAdapter(this, TrackedItemHolder())
         recyclerView.setMAdapter(trackedItemAdapter)
         recyclerView.setRefreshing(true)
 

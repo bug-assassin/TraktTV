@@ -3,7 +3,7 @@ package com.pixis.traktTV.base.adapters
 import android.view.View
 import butterknife.ButterKnife
 
-abstract class BaseViewHolder<T>() {
+abstract class BaseViewHolder<T> {
     lateinit var itemView: View
 
     abstract val layoutId: Int

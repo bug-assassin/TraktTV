@@ -1,8 +1,8 @@
 package com.pixis.traktTV.screen_main
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
-import android.support.v7.view.menu.ActionMenuItemView
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -11,25 +11,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.pixis.traktTV.R
-import com.pixis.traktTV.adapters.SingleItemAdapter
+import com.pixis.traktTV.adapters.RecyclerListAdapter
 import com.pixis.traktTV.base.BaseApplication
 import com.pixis.traktTV.base.Repository
 import com.pixis.traktTV.base.adapters.BaseViewHolder
-import com.pixis.traktTV.base.adapters.BindableViewHolder
 import com.pixis.trakt_api.services_fanart.FanArtImages
 import com.pixis.trakt_api.services_trakt.models.Show
-import com.pixis.trakt_api.utils.applySchedulers
 import com.squareup.picasso.Picasso
+import io.reactivex.functions.Consumer
 import javax.inject.Inject
 
 class ShowsFragment: Fragment() {
     @BindView(R.id.recyclerView)
     lateinit var recyclerView: RecyclerView
-    lateinit var mAdapter: ShowAdapter
+    lateinit var mAdapter: RecyclerListAdapter<Pair<Show, FanArtImages>>
 
     @Inject
     lateinit var repo: Repository
@@ -41,59 +39,34 @@ class ShowsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         ButterKnife.bind(this, view)
 
-        mAdapter = ShowAdapter(Picasso.with(activity))
+        (activity.applicationContext as BaseApplication).component.inject(this)
+        mAdapter = RecyclerListAdapter<Pair<Show, FanArtImages>>(ShowViewHolder(Picasso.with(activity)))
         recyclerView.layoutManager = GridLayoutManager(activity, 2)
         recyclerView.adapter = mAdapter
 
-        (activity.applicationContext as BaseApplication).component.inject(this)
-
         //TODO Move to presenter
-        repo.getTrendingShows().subscribe ({
-            setData(it)
-        },
-                {
-                    it.printStackTrace()
-                })
-
+        repo.getTrendingShows().subscribe(getConsumer(), Consumer<Throwable>{ showError(it) })
+        mAdapter.clickObservable.subscribe {
+            Log.v("Click", "Click " + it.item.first.title + " - " + it.isLongClick)
+        }
     }
 
-    private fun  showError(it: Throwable) {
-        Toast.makeText(activity, it.message, Toast.LENGTH_SHORT)
-    }
+    fun getConsumer() = mAdapter.consumer //So we can mock this
 
-    fun setData(data: List<Pair<Show, FanArtImages>>) {
-        mAdapter.data = data
-        mAdapter.notifyDataSetChanged()
+    fun  showError(it: Throwable) {
+        Snackbar.make(activity.findViewById(R.id.coordinator_main_content), it.message.toString(), Snackbar.LENGTH_SHORT)
+                .setAction("Retry", {
+                }).show()
     }
 
 }
-class ShowAdapter(val picasso: Picasso): RecyclerView.Adapter<ShowViewHolder>() {
-    var data: List<Pair<Show, FanArtImages>> = emptyList()
-
-    override fun getItemCount(): Int {
-        return data.size
-    }
-
-    override fun onBindViewHolder(holder: ShowViewHolder, position: Int) {
-        holder.onBind(data[position])
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.common_poster_summary, parent, false)
-        return ShowViewHolder(v, picasso)
-    }
-
-}
-class ShowViewHolder(itemView: View, val picasso: Picasso): RecyclerView.ViewHolder(itemView) {
-
-    init {
-        ButterKnife.bind(this, itemView)
-    }
+class ShowViewHolder(val picasso: Picasso): BaseViewHolder<Pair<Show, FanArtImages>>() {
+    override val layoutId = R.layout.common_poster_summary
 
     @BindView(R.id.imgMediaItem) lateinit var imgMediaItem: ImageView
     @BindView(R.id.lblMediaTitle) lateinit var lblMediaTitle: TextView
 
-    fun onBind(item: Pair<Show, FanArtImages>) {
+    override fun onBind(item: Pair<Show, FanArtImages>) {
         lblMediaTitle.text = item.first.title
         if(item.second.tvposter.isNotEmpty()) {
             picasso.load(item.second.tvposter.first().getPreviewUrl()).placeholder(android.R.color.darker_gray).fit().into(imgMediaItem)
