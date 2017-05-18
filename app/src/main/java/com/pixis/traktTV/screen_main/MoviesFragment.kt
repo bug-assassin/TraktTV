@@ -1,5 +1,6 @@
 package com.pixis.traktTV.screen_main
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
@@ -18,6 +19,7 @@ import com.pixis.traktTV.adapters.RecyclerListAdapter
 import com.pixis.traktTV.base.BaseApplication
 import com.pixis.traktTV.base.Repository
 import com.pixis.traktTV.base.adapters.BaseViewHolder
+import com.pixis.traktTV.screen_movies_detail.MoviesDetail
 import com.pixis.trakt_api.services_fanart.MovieImages
 import com.pixis.trakt_api.services_fanart.ShowImages
 import com.pixis.trakt_api.services_trakt.models.Movie
@@ -47,8 +49,10 @@ class MoviesFragment: Fragment() {
 
         //TODO Move to presenter
         repo.getTrendingMovies().subscribe(getConsumer(), Consumer<Throwable>{ showError(it) })
-        mAdapter.clickObservable.subscribe {
-            Log.v("Click", "Click " + it.item.first.title + " - " + it.isLongClick)
+        mAdapter.clickObservable
+                .filter { !it.isLongClick }
+                .subscribe {
+            startActivity(Intent(context, MoviesDetail::class.java))
         }
     }
 
@@ -70,6 +74,8 @@ class MovieViewHolder(val picasso: Picasso): BaseViewHolder<Pair<Movie, MovieIma
     override fun onBind(item: Pair<Movie, MovieImages>) {
         lblMediaTitle.text = item.first.title
         if(item.second.movieposter.isNotEmpty()) {
+            if(item.second.moviebackground.isNotEmpty()) picasso.load(item.second.moviebackground.first().getPreviewUrl()).fetch()
+
             picasso.load(item.second.movieposter.first().getPreviewUrl()).placeholder(android.R.color.darker_gray).fit().into(imgMediaItem)
         }
         else {
