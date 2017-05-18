@@ -18,7 +18,7 @@ import com.pixis.traktTV.adapters.RecyclerListAdapter
 import com.pixis.traktTV.base.BaseApplication
 import com.pixis.traktTV.base.Repository
 import com.pixis.traktTV.base.adapters.BaseViewHolder
-import com.pixis.trakt_api.services_fanart.FanArtImages
+import com.pixis.trakt_api.services_fanart.ShowImages
 import com.pixis.trakt_api.services_trakt.models.Show
 import com.squareup.picasso.Picasso
 import io.reactivex.functions.Consumer
@@ -27,7 +27,7 @@ import javax.inject.Inject
 class ShowsFragment: Fragment() {
     @BindView(R.id.recyclerView)
     lateinit var recyclerView: RecyclerView
-    lateinit var mAdapter: RecyclerListAdapter<Pair<Show, FanArtImages>>
+    lateinit var mAdapter: RecyclerListAdapter<Pair<Show, ShowImages>>
 
     @Inject
     lateinit var repo: Repository
@@ -40,7 +40,7 @@ class ShowsFragment: Fragment() {
         ButterKnife.bind(this, view)
 
         (activity.applicationContext as BaseApplication).component.inject(this)
-        mAdapter = RecyclerListAdapter<Pair<Show, FanArtImages>>(ShowViewHolder(Picasso.with(activity)))
+        mAdapter = RecyclerListAdapter(ShowViewHolder(Picasso.with(activity)))
         recyclerView.layoutManager = GridLayoutManager(activity, 2)
         recyclerView.adapter = mAdapter
 
@@ -60,13 +60,13 @@ class ShowsFragment: Fragment() {
     }
 
 }
-class ShowViewHolder(val picasso: Picasso): BaseViewHolder<Pair<Show, FanArtImages>>() {
+class ShowViewHolder(val picasso: Picasso): BaseViewHolder<Pair<Show, ShowImages>>() {
     override val layoutId = R.layout.common_poster_summary
 
     @BindView(R.id.imgMediaItem) lateinit var imgMediaItem: ImageView
     @BindView(R.id.lblMediaTitle) lateinit var lblMediaTitle: TextView
 
-    override fun onBind(item: Pair<Show, FanArtImages>) {
+    override fun onBind(item: Pair<Show, ShowImages>) {
         lblMediaTitle.text = item.first.title
         if(item.second.tvposter.isNotEmpty()) {
             picasso.load(item.second.tvposter.first().getPreviewUrl()).placeholder(android.R.color.darker_gray).fit().into(imgMediaItem)
