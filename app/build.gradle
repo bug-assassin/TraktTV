@@ -46,6 +46,10 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$support_library_version"
     compile "com.android.support:design:$support_library_version"
 
+    //Architecture
+    compile "android.arch.lifecycle:extensions:$archLifecycleVersion"
+    kapt "android.arch.lifecycle:compiler:$archLifecycleVersion"
+
     compile "com.jakewharton:butterknife:$butterknife_version"
     kapt "com.jakewharton:butterknife-compiler:$butterknife_version"
 

@@ -1,5 +1,6 @@
 package com.pixis.traktTV.screen_movies_detail
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.CollapsingToolbarLayout
@@ -22,9 +23,15 @@ class MoviesDetail : AppCompatActivity() {
     @BindView(R.id.imgMediaTrailer)
     lateinit var imgMediaTrailer: ImageView
 
+    lateinit var viewModel: MovieDetailViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies_detail)
+
+        viewModel = ViewModelProviders.of(this).get(MovieDetailViewModel::class.java)
+        viewModel.bindView()
+
         val toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
 
