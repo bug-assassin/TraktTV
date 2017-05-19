@@ -1,5 +1,5 @@
 package com.pixis.traktTV.views
-
+/*
 import android.content.Context
 import android.widget.Toast
 import com.pixis.traktTV.R
@@ -41,4 +41,4 @@ class RealmResultsObservable<T : RealmModel>(private val realmResults: RealmResu
 }
 fun <T : RealmModel> RealmResults<T>.asObservable2(): Observable<RealmResults<T>> {
     return Observable.create(RealmResultsObservable(this))
-}
+}*/

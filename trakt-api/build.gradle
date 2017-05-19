@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'realm-android'
+//apply plugin: 'realm-android'
 
 android {
     compileSdkVersion rootProject.sdkVersion
@@ -50,8 +50,11 @@ dependencies {
     compile ("com.squareup.retrofit2:converter-moshi:$retrofit_version") {
         exclude module: "moshi"
     }
-    compile "com.squareup.moshi:moshi:$moshi_version"
-    compile "com.squareup.moshi:moshi-kotlin:$moshi_version"
+    compile("com.squareup.moshi:moshi-kotlin:$moshi_version") {
+        exclude module: "kotlin-stdlib"
+        exclude module: "kotlin-reflect"
+    }
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
     compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
 

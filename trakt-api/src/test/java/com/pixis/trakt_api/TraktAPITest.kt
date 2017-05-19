@@ -35,11 +35,12 @@ class TraktAPITest {
 
     @Test
     fun TestGetTrendingMovies() {
-        assert(movieService.getTrendingMovies().blockingGet().size > 0)
+        assert(movieService.getTrendingMovies().blockingGet().isNotEmpty())
     }
 
     @Test
     fun TestGetTrendingShows() {
-        assert(showService.getTrendingShows().blockingGet().size > 0)
+        assert(showService.getTrendingShows().blockingGet().isNotEmpty())
     }
+
 }
