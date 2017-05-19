@@ -14,15 +14,15 @@ interface ImageService {
 
 data class MovieImages(val name : String,
                       val thetvdb_id : Int,
-                      val hdmovielogo: List<FanArtImage>? = emptyList(),
-                      val moviedisc: List<FanArtImage>? = emptyList(),
-                      val movielogo: List<FanArtImage>? = emptyList(),
-                      val movieposter: List<FanArtImage>? = emptyList(),
-                      val hdmovieclearart: List<FanArtImage>? = emptyList(),
-                      val movieart: List<FanArtImage>? = emptyList(),
-                      val moviebackground: List<FanArtImage>? = emptyList(),
-                      val moviebanner: List<FanArtImage>? = emptyList(),
-                      val moviethumb: List<FanArtImage>? = emptyList())
+                      val hdmovielogo: List<FanArtImage> = emptyList(),
+                      val moviedisc: List<FanArtImage> = emptyList(),
+                      val movielogo: List<FanArtImage> = emptyList(),
+                      val movieposter: List<FanArtImage> = emptyList(),
+                      val hdmovieclearart: List<FanArtImage> = emptyList(),
+                      val movieart: List<FanArtImage> = emptyList(),
+                      val moviebackground: List<FanArtImage> = emptyList(),
+                      val moviebanner: List<FanArtImage> = emptyList(),
+                      val moviethumb: List<FanArtImage> = emptyList())
 
 data class ShowImages(val name : String,
                       val thetvdb_id : Int,
