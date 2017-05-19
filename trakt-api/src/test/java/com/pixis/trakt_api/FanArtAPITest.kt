@@ -48,6 +48,8 @@ class FanArtAPITest {
         assert(loadedImages.thetvdb_id == showId)
         assert(loadedImages.name == showName)
 
+        assert(loadedImages.clearlogo.isEmpty()) //Ensure it uses default values instead of null
+
         assert(loadedImages.hdtvlogo.isNotEmpty())
         assert(loadedImages.showbackground.isNotEmpty())
         assert(loadedImages.tvbanner.isNotEmpty())

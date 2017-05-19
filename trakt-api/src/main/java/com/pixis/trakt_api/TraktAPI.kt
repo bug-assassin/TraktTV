@@ -2,9 +2,6 @@ package com.pixis.trakt_api
 
 import com.pixis.trakt_api.utils.Token.TokenStorage
 import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 object TraktAPI {
 
