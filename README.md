@@ -1,14 +1,16 @@
 # TraktTV
 [![Build Status](https://travis-ci.org/DanSirbu/TraktTV.svg?branch=master)](https://travis-ci.org/DanSirbu/TraktTV)
 
-Android app that notifies you when the next episode of your trakt watchlist airs.
+View trending movies and TV shows on your Android phone.
+> Currently being updated to use [Android Architecture Components](https://github.com/googlesamples/android-architecture-components)
 
-Uses:
+## Libraries and technologies:
+- Kotlin
 - OAuth2
-- RxJava
-- Realm
+- RxJava2
 - Retrofit2
 - Dagger2
+- JUnit for testing
 
 
 <img src="screenshots/main_screen.png" width="49%" />
